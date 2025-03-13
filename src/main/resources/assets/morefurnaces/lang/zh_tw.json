@@ -1,0 +1,13 @@
+{
+  "block.morefurnaces.iron_furnace": "鐵製熔爐",
+  "block.morefurnaces.gold_furnace": "黃金熔爐",
+  "block.morefurnaces.diamond_furnace": "鑽石熔爐",
+  "block.morefurnaces.netherite_furnace": "獄髓熔爐",
+  
+  "item.morefurnaces.double_furnace_module": "加速熔爐組件",
+  "item.morefurnaces.double_furnace_module.description": "速度加倍，但燃料消耗量增加。",
+  "item.morefurnaces.half_furnace_module": "效率熔爐組件",
+  "item.morefurnaces.half_furnace_module.description": "燃料消耗量減半，但速度會降低。",
+  "item.morefurnaces.furnace_module.invalid": "熔爐已包含組件！",
+  "item.morefurnaces.furnace_module.success": "組件已安裝！"
+}
