@@ -1,5 +1,6 @@
 package pw.smto.morefurnaces.item;
 
+import net.minecraft.component.type.TooltipDisplayComponent;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemUsageContext;
@@ -20,6 +21,7 @@ import pw.smto.morefurnaces.block.CustomFurnaceBlockEntity;
 import xyz.nucleoid.packettweaker.PacketContext;
 
 import java.util.List;
+import java.util.function.Consumer;
 
 public class FurnaceModuleItem extends Item implements eu.pb4.polymer.core.api.item.PolymerItem, MoreFurnacesContent {
 
@@ -50,8 +52,8 @@ public class FurnaceModuleItem extends Item implements eu.pb4.polymer.core.api.i
     }
 
     @Override
-    public void appendTooltip(ItemStack stack, TooltipContext context, List<Text> tooltip, TooltipType type) {
-       tooltip.add(Text.translatable(stack.getItem().getTranslationKey() + ".description").formatted(Formatting.GRAY));
+    public void appendTooltip(ItemStack stack, Item.TooltipContext context, TooltipDisplayComponent displayComponent, Consumer<Text> textConsumer, TooltipType type) {
+        textConsumer.accept(Text.translatable(stack.getItem().getTranslationKey() + ".description").formatted(Formatting.GRAY));
     }
 
 

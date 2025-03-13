@@ -132,24 +132,24 @@ public class CustomFurnaceBlockEntity extends LockableContainerBlockEntity imple
         super.readNbt(nbt, registries);
         this.inventory = DefaultedList.ofSize(this.size(), ItemStack.EMPTY);
         Inventories.readNbt(nbt, this.inventory, registries);
-        this.burnTime = nbt.getShort("BurnTime");
-        this.cookTime = nbt.getShort("CookTime");
-        this.cookTimeTotal = nbt.getShort("CookTimeTotal");
+        this.burnTime = nbt.getShort("BurnTime").orElse((short)0);
+        this.cookTime = nbt.getShort("CookTime").orElse((short)0);
+        this.cookTimeTotal = nbt.getShort("CookTimeTotal").orElse((short)0);
         this.fuelTime = 0;
-        NbtCompound nbtCompound = nbt.getCompound("RecipesUsed");
+        NbtCompound nbtCompound = nbt.getCompound("RecipesUsed").orElse(new NbtCompound());
 
         for (String string : nbtCompound.getKeys()) {
-            this.recipesUsed.put(RegistryKey.of(RegistryKeys.RECIPE, Identifier.of(string)), nbtCompound.getInt(string));
+            this.recipesUsed.put(RegistryKey.of(RegistryKeys.RECIPE, Identifier.of(string)), nbtCompound.getInt(string).orElse(0));
         }
 
         if(nbt.contains("module")) {
-            this.installedModule = FurnaceModule.values()[nbt.getInt("module")];
+            this.installedModule = FurnaceModule.values()[nbt.getInt("module").orElse(0)];
         }
         if(nbt.contains("multiplier")) {
-            this.speedMultiplier = nbt.getInt("multiplier");
+            this.speedMultiplier = nbt.getInt("multiplier").orElse(1);
         }
         if(nbt.contains("titleTranslationKey")) {
-            this.titleTranslationKey = nbt.getString("titleTranslationKey");
+            this.titleTranslationKey = nbt.getString("titleTranslationKey").orElse("invalid");
         }
     }
 
@@ -209,7 +209,6 @@ public class CustomFurnaceBlockEntity extends LockableContainerBlockEntity imple
             this.moduleDisplay.setShadowRadius(0.0f);
             this.moduleDisplay.setShadowStrength(0.0f);
             this.moduleDisplay.setPosition(this.moduleDisplayPosition);
-            this.moduleDisplay.setTransformationMode(ModelTransformationMode.GUI);
             world.spawnEntity(this.moduleDisplay);
         }
     }
