@@ -542,4 +542,12 @@ public class CustomFurnaceBlockEntity extends LockableContainerBlockEntity imple
             finder.addInput(itemStack);
         }
     }
+
+    @Override
+    public void onBlockReplaced(BlockPos pos, BlockState oldState) {
+        super.onBlockReplaced(pos, oldState);
+        if (this.world instanceof ServerWorld serverWorld) {
+            this.getRecipesUsedAndDropExperience(serverWorld, Vec3d.ofCenter(pos));
+        }
+    }
 }
