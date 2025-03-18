@@ -18,8 +18,10 @@ import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.stat.Stats;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.ItemScatterer;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldView;
 import org.jetbrains.annotations.Nullable;
@@ -150,5 +152,24 @@ public class CustomFurnaceBlock extends FurnaceBlock implements PolymerTexturedB
         }
         return super.onBreak(world, pos, state, player);
     }
+
+    @Override
+    protected void onStateReplaced(BlockState state, World world, BlockPos pos, BlockState newState, boolean moved) {
+        if (!state.isOf(newState.getBlock())) {
+            BlockEntity blockEntity = world.getBlockEntity(pos);
+            if (blockEntity instanceof CustomFurnaceBlockEntity) {
+                if (world instanceof ServerWorld) {
+                    ItemScatterer.spawn(world, pos, (CustomFurnaceBlockEntity)blockEntity);
+                    ((CustomFurnaceBlockEntity)blockEntity).getRecipesUsedAndDropExperience((ServerWorld)world, Vec3d.ofCenter(pos));
+                }
+
+                super.onStateReplaced(state, world, pos, newState, moved);
+                world.updateComparators(pos, this);
+            } else {
+                super.onStateReplaced(state, world, pos, newState, moved);
+            }
+        }
+    }
+
 
 }
