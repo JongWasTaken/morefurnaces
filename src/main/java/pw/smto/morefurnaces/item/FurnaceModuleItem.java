@@ -1,5 +1,7 @@
 package pw.smto.morefurnaces.item;
 
+import net.minecraft.component.DataComponentTypes;
+import net.minecraft.component.type.LoreComponent;
 import net.minecraft.component.type.TooltipDisplayComponent;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -29,7 +31,9 @@ public class FurnaceModuleItem extends Item implements eu.pb4.polymer.core.api.i
     private final FurnaceModule module;
 
     public FurnaceModuleItem(Identifier id, FurnaceModule module) {
-        super(new Settings().rarity(Rarity.COMMON).registryKey(RegistryKey.of(RegistryKeys.ITEM, id)));
+        super(new Settings()
+                .rarity(Rarity.COMMON)
+                .registryKey(RegistryKey.of(RegistryKeys.ITEM, id)));
         this.id = id;
         this.module = module;
     }
