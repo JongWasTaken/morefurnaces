@@ -1,7 +1,5 @@
 package pw.smto.morefurnaces.item;
 
-import net.minecraft.component.DataComponentTypes;
-import net.minecraft.component.type.LoreComponent;
 import net.minecraft.component.type.TooltipDisplayComponent;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -17,20 +15,20 @@ import net.minecraft.util.ActionResult;
 import net.minecraft.util.Formatting;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.Rarity;
-import pw.smto.morefurnaces.FurnaceModule;
+import pw.smto.morefurnaces.DisableHelper;
+import pw.smto.morefurnaces.module.ModifierModule;
 import pw.smto.morefurnaces.api.MoreFurnacesContent;
 import pw.smto.morefurnaces.block.CustomFurnaceBlockEntity;
 import xyz.nucleoid.packettweaker.PacketContext;
 
-import java.util.List;
 import java.util.function.Consumer;
 
 public class FurnaceModuleItem extends Item implements eu.pb4.polymer.core.api.item.PolymerItem, MoreFurnacesContent {
 
     private final Identifier id;
-    private final FurnaceModule module;
+    private final ModifierModule module;
 
-    public FurnaceModuleItem(Identifier id, FurnaceModule module) {
+    public FurnaceModuleItem(Identifier id, ModifierModule module) {
         super(new Settings()
                 .rarity(Rarity.COMMON)
                 .registryKey(RegistryKey.of(RegistryKeys.ITEM, id)));
@@ -42,11 +40,11 @@ public class FurnaceModuleItem extends Item implements eu.pb4.polymer.core.api.i
     public ActionResult useOnBlock(ItemUsageContext context) {
         if (context.getPlayer() == null) return ActionResult.PASS;
         if (context.getWorld().getBlockEntity(context.getBlockPos()) instanceof CustomFurnaceBlockEntity entity) {
-            if (entity.getModule() != FurnaceModule.NO_MODULE) {
+            if (entity.getModifierModule() != ModifierModule.NO_MODULE) {
                 context.getPlayer().sendMessage(Text.translatable("item.morefurnaces.furnace_module.invalid").formatted(Formatting.RED), true);
                 return ActionResult.PASS;
             };
-            entity.setModule(this.module);
+            entity.setModifierModule(this.module);
             context.getWorld().playSound(context.getPlayer(), context.getBlockPos(), SoundEvents.BLOCK_ANVIL_USE, SoundCategory.BLOCKS, 1.0F, 1.0F);
             context.getStack().decrement(1);
             context.getPlayer().sendMessage(Text.translatable("item.morefurnaces.furnace_module.success").formatted(Formatting.GREEN), true);
@@ -58,6 +56,10 @@ public class FurnaceModuleItem extends Item implements eu.pb4.polymer.core.api.i
     @Override
     public void appendTooltip(ItemStack stack, Item.TooltipContext context, TooltipDisplayComponent displayComponent, Consumer<Text> textConsumer, TooltipType type) {
         textConsumer.accept(Text.translatable(stack.getItem().getTranslationKey() + ".description").formatted(Formatting.GRAY));
+        textConsumer.accept(Text.translatable("tooltip.morefurnaces.module_tutorial").formatted(Formatting.GRAY));
+        if (DisableHelper.isDisabled(this)) {
+            textConsumer.accept(Text.translatable("tooltip.morefurnaces.disabled").formatted(Formatting.RED));
+        }
     }
 
 

@@ -1,0 +1,4 @@
+{
+  "parent": "item/handheld",
+  "textures": { "layer0": "morefurnaces:item/fuel_5x_modifier_module" }
+}

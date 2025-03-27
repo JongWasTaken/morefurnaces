@@ -1,13 +1,40 @@
 {
   "block.morefurnaces.iron_furnace": "Iron Furnace",
-  "block.morefurnaces.gold_furnace": "Golden Furnace",
-  "block.morefurnaces.diamond_furnace": "Diamond Furnace",
-  "block.morefurnaces.netherite_furnace": "Netherite Furnace",
+  "block.morefurnaces.iron_furnace.description": "2x Speed",
 
-  "item.morefurnaces.double_furnace_module": "Speed Furnace Module",
-  "item.morefurnaces.double_furnace_module.description": "Doubles speed, but increases fuel consumption.",
-  "item.morefurnaces.half_furnace_module": "Efficiency Furnace Module",
-  "item.morefurnaces.half_furnace_module.description": "Cuts fuel consumption by half, at the cost of speed.",
+  "block.morefurnaces.gold_furnace": "Golden Furnace",
+  "block.morefurnaces.gold_furnace.description": "3x Speed",
+
+  "block.morefurnaces.diamond_furnace": "Diamond Furnace",
+  "block.morefurnaces.diamond_furnace.description": "4x Speed",
+
+  "block.morefurnaces.netherite_furnace": "Netherite Furnace",
+  "block.morefurnaces.netherite_furnace.description": "6x Speed",
+
+  "item.morefurnaces.speed_2x_modifier_module": "2x Speed Modifier Furnace Module",
+  "item.morefurnaces.speed_2x_modifier_module.description": "Doubles speed, but increases fuel consumption.",
+  "item.morefurnaces.fuel_2x_modifier_module": "2x Efficiency Modifier Furnace Module",
+  "item.morefurnaces.fuel_2x_modifier_module.description": "Cuts fuel consumption by half, at the cost of speed.",
+
+  "item.morefurnaces.speed_3x_modifier_module": "3x Speed Modifier Furnace Module",
+  "item.morefurnaces.speed_3x_modifier_module.description": "Triples speed, but increases fuel consumption.",
+  "item.morefurnaces.fuel_3x_modifier_module": "3x Efficiency Modifier Furnace Module",
+  "item.morefurnaces.fuel_3x_modifier_module.description": "Reduces fuel consumption, at the cost of speed.",
+
+  "item.morefurnaces.speed_4x_modifier_module": "4x Speed Modifier Furnace Module",
+  "item.morefurnaces.speed_4x_modifier_module.description": "Boosts speed even more, but increases fuel consumption.",
+  "item.morefurnaces.fuel_4x_modifier_module": "4x Efficiency Modifier Furnace Module",
+  "item.morefurnaces.fuel_4x_modifier_module.description": "Reduces fuel consumption even more, at the cost of speed.",
+
+  "item.morefurnaces.speed_5x_modifier_module": "5x Speed Modifier Furnace Module",
+  "item.morefurnaces.speed_5x_modifier_module.description": "Boosts speed by the utmost, but increases fuel consumption.",
+  "item.morefurnaces.fuel_5x_modifier_module": "5x Efficiency Modifier Furnace Module",
+  "item.morefurnaces.fuel_5x_modifier_module.description": "Reduces fuel consumption by the utmost, at the cost of speed.",
+
   "item.morefurnaces.furnace_module.invalid": "Furnace already contains a module!",
-  "item.morefurnaces.furnace_module.success": "Module installed!"
+  "item.morefurnaces.furnace_module.success": "Module installed!",
+
+  "tooltip.morefurnaces.disabled": "Disabled by Config",
+  "tooltip.morefurnaces.supports_modules": "Can be upgraded with modules.",
+  "tooltip.morefurnaces.module_tutorial": "Sneak + Right-click on a furnace to install."
 }

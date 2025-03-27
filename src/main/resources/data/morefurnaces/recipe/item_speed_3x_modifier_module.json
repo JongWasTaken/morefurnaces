@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    "morefurnaces:speed_2x_modifier_module",
+    "morefurnaces:speed_2x_modifier_module"
+  ],
+  "result": {
+    "id": "morefurnaces:speed_3x_modifier_module",
+    "count": 1
+  }
+}

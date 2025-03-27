@@ -43,16 +43,17 @@ import net.minecraft.util.math.*;
 import net.minecraft.util.math.random.Random;
 import org.jetbrains.annotations.Nullable;
 import org.joml.Vector3f;
-import pw.smto.morefurnaces.FurnaceModule;
+import pw.smto.morefurnaces.module.ModifierModule;
 import pw.smto.morefurnaces.MoreFurnaces;
 
 import java.util.List;
 
 public class CustomFurnaceBlockEntity extends LockableContainerBlockEntity implements SidedInventory, RecipeUnlocker, RecipeInputProvider {
     private int speedMultiplier = 1;
-    private FurnaceModule installedModule = FurnaceModule.NO_MODULE;
+    private ModifierModule installedModifierModule = ModifierModule.NO_MODULE;
     private String titleTranslationKey = "";
     private final Random random = Random.create();
+    private boolean powered = false;
 
     private static final int[] TOP_SLOTS = new int[]{0};
     private static final int[] BOTTOM_SLOTS = new int[]{2, 1};
@@ -143,7 +144,10 @@ public class CustomFurnaceBlockEntity extends LockableContainerBlockEntity imple
         }
 
         if(nbt.contains("module")) {
-            this.installedModule = FurnaceModule.values()[nbt.getInt("module").orElse(0)];
+            this.installedModifierModule = ModifierModule.values()[nbt.getInt("module").orElse(0)];
+        }
+        if(nbt.contains("modifierModule")) {
+            this.installedModifierModule = ModifierModule.values()[nbt.getInt("modifierModule").orElse(0)];
         }
         if(nbt.contains("multiplier")) {
             this.speedMultiplier = nbt.getInt("multiplier").orElse(1);
@@ -151,12 +155,16 @@ public class CustomFurnaceBlockEntity extends LockableContainerBlockEntity imple
         if(nbt.contains("titleTranslationKey")) {
             this.titleTranslationKey = nbt.getString("titleTranslationKey").orElse("invalid");
         }
+        if(nbt.contains("powered")) {
+            this.powered = nbt.getBoolean("powered").orElse(false);
+        }
     }
 
     @Override
     protected void writeNbt(NbtCompound nbt, RegistryWrapper.WrapperLookup registries) {
+        nbt.putBoolean("powered", this.powered);
         nbt.putInt("multiplier", this.speedMultiplier);
-        nbt.putInt("module", this.installedModule.ordinal());
+        nbt.putInt("modifierModule", this.installedModifierModule.ordinal());
         nbt.putString("titleTranslationKey", this.titleTranslationKey);
         super.writeNbt(nbt, registries);
         nbt.putShort("BurnTime", (short)this.burnTime);
@@ -183,7 +191,7 @@ public class CustomFurnaceBlockEntity extends LockableContainerBlockEntity imple
             this.moduleDisplayPosition = this.calculateModuleDisplayPosition(world.getBlockState(pos).get(AbstractFurnaceBlock.FACING));
         }
 
-        if (this.moduleDisplay == null && this.installedModule != FurnaceModule.NO_MODULE) {
+        if (this.moduleDisplay == null && this.installedModifierModule != ModifierModule.NO_MODULE) {
             var entities = world.getEntitiesByClass(
                     DisplayEntity.ItemDisplayEntity.class,
                     new Box(
@@ -198,7 +206,7 @@ public class CustomFurnaceBlockEntity extends LockableContainerBlockEntity imple
             var d = state.get(AbstractFurnaceBlock.FACING);
 
             this.moduleDisplay = new DisplayEntity.ItemDisplayEntity(EntityType.ITEM_DISPLAY, world);
-            this.moduleDisplay.setItemStack(this.installedModule.getItemStack());
+            this.moduleDisplay.setItemStack(this.installedModifierModule.getItemStack());
             this.moduleDisplay.setTransformation(new AffineTransformation(
                     null,
                     AffineTransformations.DIRECTION_ROTATIONS.get(d.getOpposite()).getLeftRotation(),
@@ -236,7 +244,8 @@ public class CustomFurnaceBlockEntity extends LockableContainerBlockEntity imple
 
     public static void tick(ServerWorld world, BlockPos pos, BlockState state, CustomFurnaceBlockEntity t) {
         t.ensureItemDisplayExistence(world, pos);
-        for (int i = 0; i < t.installedModule.adjustSpeedMultiplier(t.speedMultiplier); i++) {
+        if (t.powered) return;
+        for (int i = 0; i < t.installedModifierModule.adjustSpeedMultiplier(t.speedMultiplier); i++) {
             CustomFurnaceBlockEntity.smeltTick(world, pos, state, t);
         }
         if (t.random.nextInt(20) >= 18) {
@@ -276,15 +285,24 @@ public class CustomFurnaceBlockEntity extends LockableContainerBlockEntity imple
 
     }
 
-    public void setModule(FurnaceModule module) {
-        this.installedModule = module;
-        this.fuelTime = this.installedModule.adjustFuelTime(this.fuelTime);
-        this.burnTime = this.installedModule.adjustFuelTime(this.burnTime);
+    public void setModifierModule(ModifierModule module) {
+        this.installedModifierModule = module;
+        this.fuelTime = this.installedModifierModule.adjustFuelTime(this.fuelTime);
+        this.burnTime = this.installedModifierModule.adjustFuelTime(this.burnTime);
         this.markDirty();
     }
 
-    public FurnaceModule getModule() {
-        return this.installedModule;
+    public boolean getPowered() {
+        return this.powered;
+    }
+
+    public void setPowered(boolean powered) {
+        this.powered = powered;
+        this.markDirty();
+    }
+
+    public ModifierModule getModifierModule() {
+        return this.installedModifierModule;
     }
 
     public static void smeltTick(ServerWorld world, BlockPos pos, BlockState state, CustomFurnaceBlockEntity blockEntity) {
@@ -411,7 +429,7 @@ public class CustomFurnaceBlockEntity extends LockableContainerBlockEntity imple
     }
 
     protected int getFuelTime(FuelRegistry fuelRegistry, ItemStack stack) {
-        return this.installedModule.adjustFuelTime(fuelRegistry.getFuelTicks(stack));
+        return this.installedModifierModule.adjustFuelTime(fuelRegistry.getFuelTicks(stack));
     }
 
     private static int getCookTime(ServerWorld world, CustomFurnaceBlockEntity furnace) {

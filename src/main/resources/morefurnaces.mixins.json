@@ -3,7 +3,8 @@
   "package": "pw.smto.morefurnaces.mixin",
   "compatibilityLevel": "JAVA_21",
   "mixins": [
-    "FurnaceOutputSlotMixin"
+    "FurnaceOutputSlotMixin",
+    "ShapelessRecipeMixin"
   ],
   "injectors": {
     "defaultRequire": 1

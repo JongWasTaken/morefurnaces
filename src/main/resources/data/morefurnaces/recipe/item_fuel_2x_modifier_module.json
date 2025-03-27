@@ -1,18 +1,18 @@
 {
   "type": "minecraft:crafting_shaped",
   "pattern": [
-    "GRG",
+    "CRC",
     "FDF",
-    "GRG"
+    "CRC"
   ],
   "key": {
-    "G": "minecraft:gold_ingot",
+    "C": "minecraft:coal",
     "R": "minecraft:redstone",
     "D": "minecraft:diamond",
     "F": "minecraft:blast_furnace"
   },
   "result": {
-    "id": "morefurnaces:double_furnace_module",
+    "id": "morefurnaces:fuel_2x_modifier_module",
     "count": 1
   }
 }

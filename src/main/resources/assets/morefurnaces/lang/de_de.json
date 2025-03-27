@@ -1,13 +1,40 @@
 {
   "block.morefurnaces.iron_furnace": "Eisenofen",
-  "block.morefurnaces.gold_furnace": "Goldofen",
-  "block.morefurnaces.diamond_furnace": "Diamantofen",
-  "block.morefurnaces.netherite_furnace": "Netheritofen",
+  "block.morefurnaces.iron_furnace.description": "2x Geschwindigkeit",
 
-  "item.morefurnaces.double_furnace_module": "Geschwindigkeitsofenmodul",
-  "item.morefurnaces.double_furnace_module.description": "Verdoppelt die Geschwindigkeit, jedoch auch den Verbrauch.",
-  "item.morefurnaces.half_furnace_module": "Effizienzofenmodul",
-  "item.morefurnaces.half_furnace_module.description": "Halbiert den Verbrauch, auf Kosten der Geschwindigkeit.",
+  "block.morefurnaces.gold_furnace": "Goldofen",
+  "block.morefurnaces.gold_furnace.description": "3x Geschwindigkeit",
+
+  "block.morefurnaces.diamond_furnace": "Diamantofen",
+  "block.morefurnaces.diamond_furnace.description": "4x Geschwindigkeit",
+
+  "block.morefurnaces.netherite_furnace": "Netheritofen",
+  "block.morefurnaces.netherite_furnace.description": "6x Geschwindigkeit",
+
+  "item.morefurnaces.speed_2x_modifier_module": "2x Geschwindigkeitsmodul",
+  "item.morefurnaces.speed_2x_modifier_module.description": "Verdoppelt die Geschwindigkeit, jedoch auch den Verbrauch.",
+  "item.morefurnaces.fuel_2x_modifier_module": "2x Effizienzmodul",
+  "item.morefurnaces.fuel_2x_modifier_module.description": "Halbiert den Verbrauch, auf Kosten der Geschwindigkeit.",
+
+  "item.morefurnaces.speed_3x_modifier_module": "3x Geschwindigkeitsmodul",
+  "item.morefurnaces.speed_3x_modifier_module.description": "Verdreifacht die Geschwindigkeit, jedoch auch den Verbrauch.",
+  "item.morefurnaces.fuel_3x_modifier_module": "3x Effizienzmodul",
+  "item.morefurnaces.fuel_3x_modifier_module.description": "Reduziert den Verbrauch, auf Kosten der Geschwindigkeit.",
+
+  "item.morefurnaces.speed_4x_modifier_module": "4x Geschwindigkeitsmodul",
+  "item.morefurnaces.speed_4x_modifier_module.description": "Erhöht die Geschwindigkeit noch mehr, jedoch auch den Verbrauch.",
+  "item.morefurnaces.fuel_4x_modifier_module": "4x Effizienzmodul",
+  "item.morefurnaces.fuel_4x_modifier_module.description": "Reduziert den Verbrauch noch mehr, auf Kosten der Geschwindigkeit.",
+
+  "item.morefurnaces.speed_5x_modifier_module": "5x Geschwindigkeitsmodul",
+  "item.morefurnaces.speed_5x_modifier_module.description": "Erhöht die Geschwindigkeit am meisten, jedoch auch den Verbrauch.",
+  "item.morefurnaces.fuel_5x_modifier_module": "5x Effizienzmodul",
+  "item.morefurnaces.fuel_5x_modifier_module.description": "Reduziert den Verbrauch am meisten, auf Kosten der Geschwindigkeit.",
+
   "item.morefurnaces.furnace_module.invalid": "Ofen enthält bereits ein Modul!",
-  "item.morefurnaces.furnace_module.success": "Modul installiert!"
+  "item.morefurnaces.furnace_module.success": "Modul installiert!",
+
+  "tooltip.morefurnaces.disabled": "Deaktiviert",
+  "tooltip.morefurnaces.supports_modules": "Kann mit Modulen verbessert werden.",
+  "tooltip.morefurnaces.module_tutorial": "Schleichen + Rechtsklick zum Installieren."
 }

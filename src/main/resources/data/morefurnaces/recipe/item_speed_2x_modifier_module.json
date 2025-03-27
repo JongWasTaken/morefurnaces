@@ -1,18 +1,18 @@
 {
   "type": "minecraft:crafting_shaped",
   "pattern": [
-    "CRC",
+    "GRG",
     "FDF",
-    "CRC"
+    "GRG"
   ],
   "key": {
-    "C": "minecraft:coal",
+    "G": "minecraft:gold_ingot",
     "R": "minecraft:redstone",
     "D": "minecraft:diamond",
     "F": "minecraft:blast_furnace"
   },
   "result": {
-    "id": "morefurnaces:half_furnace_module",
+    "id": "morefurnaces:speed_2x_modifier_module",
     "count": 1
   }
 }

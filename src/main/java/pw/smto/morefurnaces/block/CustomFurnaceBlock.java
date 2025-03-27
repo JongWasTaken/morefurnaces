@@ -22,13 +22,13 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldView;
+import net.minecraft.world.block.WireOrientation;
 import org.jetbrains.annotations.Nullable;
 import pw.smto.morefurnaces.MoreFurnaces;
 import pw.smto.morefurnaces.api.MoreFurnacesContent;
 import xyz.nucleoid.packettweaker.PacketContext;
 
 public class CustomFurnaceBlock extends FurnaceBlock implements PolymerTexturedBlock, MoreFurnacesContent {
-    private final Block base;
     private final BlockState baseStateNorth;
     private final BlockState baseStateEast;
     private final BlockState baseStateSouth;
@@ -44,7 +44,6 @@ public class CustomFurnaceBlock extends FurnaceBlock implements PolymerTexturedB
     public CustomFurnaceBlock(Identifier id, int speedMultiplier, BlockSoundGroup sound)
     {
         super(Settings.copy(Blocks.FURNACE).registryKey(RegistryKey.of(RegistryKeys.BLOCK, id)));
-        this.base = Blocks.FURNACE;
         this.id = id;
         this.sound = sound;
         var left = PolymerBlockResourceUtils.getBlocksLeft(BlockModelType.FULL_BLOCK);
@@ -92,6 +91,21 @@ public class CustomFurnaceBlock extends FurnaceBlock implements PolymerTexturedB
     }
 
     @Override
+    protected void neighborUpdate(BlockState state, World world, BlockPos pos, Block sourceBlock, @Nullable WireOrientation wireOrientation, boolean notify) {
+        if (world.getBlockEntity(pos) instanceof CustomFurnaceBlockEntity be) {
+            boolean bl = world.isReceivingRedstonePower(pos) || world.isReceivingRedstonePower(pos.up());
+            boolean bl2 = be.getPowered();
+            if (bl && !bl2) {
+                be.setPowered(true);
+                //world.setBlockState(pos, state.with(MechanicalPlacerBlock.POWERED, Boolean.TRUE), Block.NOTIFY_LISTENERS);
+            } else if (!bl && bl2) {
+                be.setPowered(false);
+                //world.setBlockState(pos, state.with(MechanicalPlacerBlock.POWERED, Boolean.FALSE), Block.NOTIFY_LISTENERS);
+            }
+        }
+    }
+
+    @Override
     public BlockEntity createBlockEntity(BlockPos pos, BlockState state) {
         return new CustomFurnaceBlockEntity(pos, state, this.translationKey, this.speedMultiplier);
     }
@@ -120,7 +134,7 @@ public class CustomFurnaceBlock extends FurnaceBlock implements PolymerTexturedB
 
     @Override
     public BlockState getPolymerBreakEventBlockState(BlockState state, PacketContext context) {
-        return this.base.getDefaultState();
+        return Blocks.FURNACE.getDefaultState();
     }
     @Override
     public BlockSoundGroup getSoundGroup(BlockState state) {
@@ -144,7 +158,7 @@ public class CustomFurnaceBlock extends FurnaceBlock implements PolymerTexturedB
     public BlockState onBreak(World world, BlockPos pos, BlockState state, PlayerEntity player) {
         if (world.getBlockEntity(pos) instanceof CustomFurnaceBlockEntity ent) {
             if (!world.isClient()) {
-                player.giveOrDropStack(ent.getModule().getItemStack());
+                player.giveOrDropStack(ent.getModifierModule().getItemStack());
                 ent.killItemDisplay();
             }
         }
