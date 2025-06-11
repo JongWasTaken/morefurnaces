@@ -1,12 +1,14 @@
 package pw.smto.morefurnaces.block;
 
 import com.google.common.collect.Lists;
+import com.mojang.serialization.Codec;
 import it.unimi.dsi.fastutil.objects.Reference2IntMap;
 import it.unimi.dsi.fastutil.objects.Reference2IntOpenHashMap;
 import net.minecraft.block.AbstractFurnaceBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
+import net.minecraft.block.entity.AbstractFurnaceBlockEntity;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.LockableContainerBlockEntity;
 import net.minecraft.entity.Entity;
@@ -16,6 +18,7 @@ import net.minecraft.entity.decoration.Brightness;
 import net.minecraft.entity.decoration.DisplayEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
+import net.minecraft.inventory.ContainerLock;
 import net.minecraft.inventory.Inventories;
 import net.minecraft.inventory.SidedInventory;
 import net.minecraft.item.*;
@@ -36,7 +39,10 @@ import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
+import net.minecraft.storage.ReadView;
+import net.minecraft.storage.WriteView;
 import net.minecraft.text.Text;
+import net.minecraft.text.TextCodecs;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.collection.DefaultedList;
 import net.minecraft.util.math.*;
@@ -47,6 +53,7 @@ import pw.smto.morefurnaces.module.ModifierModule;
 import pw.smto.morefurnaces.MoreFurnaces;
 
 import java.util.List;
+import java.util.Map;
 
 public class CustomFurnaceBlockEntity extends LockableContainerBlockEntity implements SidedInventory, RecipeUnlocker, RecipeInputProvider {
     private int speedMultiplier = 1;
@@ -128,52 +135,38 @@ public class CustomFurnaceBlockEntity extends LockableContainerBlockEntity imple
         return new FurnaceScreenHandler(syncId, playerInventory, this, this.propertyDelegate);
     }
 
+    private static final Codec<Map<RegistryKey<Recipe<?>>, Integer>> CODEC = Codec.unboundedMap(Recipe.KEY_CODEC, Codec.INT);
+
     @Override
-    protected void readNbt(NbtCompound nbt, RegistryWrapper.WrapperLookup registries) {
-        super.readNbt(nbt, registries);
+    protected void readData(ReadView view) {
+        super.readData(view);
         this.inventory = DefaultedList.ofSize(this.size(), ItemStack.EMPTY);
-        Inventories.readNbt(nbt, this.inventory, registries);
-        this.burnTime = nbt.getShort("BurnTime").orElse((short)0);
-        this.cookTime = nbt.getShort("CookTime").orElse((short)0);
-        this.cookTimeTotal = nbt.getShort("CookTimeTotal").orElse((short)0);
+        Inventories.readData(view, this.inventory);
+        this.burnTime = view.getShort("BurnTime", (short)0);
+        this.cookTime = view.getShort("CookTime", (short)0);
+        this.cookTimeTotal = view.getShort("CookTimeTotal", (short)0);
         this.fuelTime = 0;
-        NbtCompound nbtCompound = nbt.getCompound("RecipesUsed").orElse(new NbtCompound());
-
-        for (String string : nbtCompound.getKeys()) {
-            this.recipesUsed.put(RegistryKey.of(RegistryKeys.RECIPE, Identifier.of(string)), nbtCompound.getInt(string).orElse(0));
-        }
-
-        if(nbt.contains("module")) {
-            this.installedModifierModule = ModifierModule.values()[nbt.getInt("module").orElse(0)];
-        }
-        if(nbt.contains("modifierModule")) {
-            this.installedModifierModule = ModifierModule.values()[nbt.getInt("modifierModule").orElse(0)];
-        }
-        if(nbt.contains("multiplier")) {
-            this.speedMultiplier = nbt.getInt("multiplier").orElse(1);
-        }
-        if(nbt.contains("titleTranslationKey")) {
-            this.titleTranslationKey = nbt.getString("titleTranslationKey").orElse("invalid");
-        }
-        if(nbt.contains("powered")) {
-            this.powered = nbt.getBoolean("powered").orElse(false);
-        }
+        this.recipesUsed.clear();
+        this.recipesUsed.putAll(view.read("RecipesUsed", CustomFurnaceBlockEntity.CODEC).orElse(Map.of()));
+        this.installedModifierModule = ModifierModule.values()[view.getInt("module", 0)];
+        this.installedModifierModule = ModifierModule.values()[view.getInt("modifierModule", 0)];
+        this.speedMultiplier = view.getInt("multiplier", 1);
+        this.titleTranslationKey = view.getString("titleTranslationKey", "invalid");
+        this.powered = view.getBoolean("powered", false);
     }
 
     @Override
-    protected void writeNbt(NbtCompound nbt, RegistryWrapper.WrapperLookup registries) {
-        nbt.putBoolean("powered", this.powered);
-        nbt.putInt("multiplier", this.speedMultiplier);
-        nbt.putInt("modifierModule", this.installedModifierModule.ordinal());
-        nbt.putString("titleTranslationKey", this.titleTranslationKey);
-        super.writeNbt(nbt, registries);
-        nbt.putShort("BurnTime", (short)this.burnTime);
-        nbt.putShort("CookTime", (short)this.cookTime);
-        nbt.putShort("CookTimeTotal", (short)this.cookTimeTotal);
-        Inventories.writeNbt(nbt, this.inventory, registries);
-        NbtCompound nbtCompound = new NbtCompound();
-        this.recipesUsed.forEach((recipeKey, count) -> nbtCompound.putInt(recipeKey.getValue().toString(), count));
-        nbt.put("RecipesUsed", nbtCompound);
+    protected void writeData(WriteView view) {
+        view.putBoolean("powered", this.powered);
+        view.putInt("multiplier", this.speedMultiplier);
+        view.putInt("modifierModule", this.installedModifierModule.ordinal());
+        view.putString("titleTranslationKey", this.titleTranslationKey);
+        super.writeData(view);
+        view.putShort("BurnTime", (short)this.burnTime);
+        view.putShort("CookTime", (short)this.cookTime);
+        view.putShort("CookTimeTotal", (short)this.cookTimeTotal);
+        Inventories.writeData(view, this.inventory);
+        view.put("RecipesUsed", CustomFurnaceBlockEntity.CODEC, this.recipesUsed);
     }
 
     private Direction getLeftDirection(Direction d) {
@@ -519,7 +512,7 @@ public class CustomFurnaceBlockEntity extends LockableContainerBlockEntity imple
     }
 
     public void dropExperienceForRecipesUsed(ServerPlayerEntity player) {
-        List<RecipeEntry<?>> list = this.getRecipesUsedAndDropExperience(player.getServerWorld(), player.getPos());
+        List<RecipeEntry<?>> list = this.getRecipesUsedAndDropExperience(player.getWorld(), player.getPos());
         player.unlockRecipes(list);
 
         for (RecipeEntry<?> recipeEntry : list) {

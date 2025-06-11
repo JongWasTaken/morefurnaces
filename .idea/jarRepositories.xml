@@ -61,5 +61,10 @@
       <option name="name" value="maven" />
       <option name="url" value="https://maven.nucleoid.xyz" />
     </remote-repository>
+    <remote-repository>
+      <option name="id" value="maven5" />
+      <option name="name" value="maven5" />
+      <option name="url" value="https://smto.dev/maven/releases" />
+    </remote-repository>
   </component>
 </project>
