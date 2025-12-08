@@ -4,6 +4,9 @@ import com.google.common.collect.Lists;
 import com.mojang.serialization.Codec;
 import it.unimi.dsi.fastutil.objects.Reference2IntMap;
 import it.unimi.dsi.fastutil.objects.Reference2IntOpenHashMap;
+import jdk.jfr.Category;
+import net.fabricmc.loader.impl.util.log.Log;
+import net.fabricmc.loader.impl.util.log.LogCategory;
 import net.minecraft.block.AbstractFurnaceBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
@@ -512,7 +515,7 @@ public class CustomFurnaceBlockEntity extends LockableContainerBlockEntity imple
     }
 
     public void dropExperienceForRecipesUsed(ServerPlayerEntity player) {
-        List<RecipeEntry<?>> list = this.getRecipesUsedAndDropExperience(player.getWorld(), player.getPos());
+        List<RecipeEntry<?>> list = this.getRecipesUsedAndDropExperience(player.getEntityWorld(), player.getEntityPos());
         player.unlockRecipes(list);
 
         for (RecipeEntry<?> recipeEntry : list) {
@@ -526,14 +529,12 @@ public class CustomFurnaceBlockEntity extends LockableContainerBlockEntity imple
 
     public List<RecipeEntry<?>> getRecipesUsedAndDropExperience(ServerWorld world, Vec3d pos) {
         List<RecipeEntry<?>> list = Lists.<RecipeEntry<?>>newArrayList();
-
         for (Reference2IntMap.Entry<RegistryKey<Recipe<?>>> entry : this.recipesUsed.reference2IntEntrySet()) {
             world.getRecipeManager().get(entry.getKey()).ifPresent(recipe -> {
                 list.add(recipe);
                 CustomFurnaceBlockEntity.dropExperience(world, pos, entry.getIntValue(), ((AbstractCookingRecipe)recipe.value()).getExperience());
             });
         }
-
         return list;
     }
 
