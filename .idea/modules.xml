@@ -2,8 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/MoreFurnaces.main.iml" filepath="$PROJECT_DIR$/.idea/modules/MoreFurnaces.main.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/MoreFurnaces.test.iml" filepath="$PROJECT_DIR$/.idea/modules/MoreFurnaces.test.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/morefurnaces.main.iml" filepath="$PROJECT_DIR$/.idea/modules/morefurnaces.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/morefurnaces.test.iml" filepath="$PROJECT_DIR$/.idea/modules/morefurnaces.test.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/pw.smto.MoreFurnaces.main.iml" filepath="$PROJECT_DIR$/.idea/modules/pw.smto.MoreFurnaces.main.iml" />
     </modules>
   </component>
