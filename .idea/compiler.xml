@@ -4,10 +4,10 @@
     <bytecodeTargetLevel target="21" />
   </component>
   <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_STRING" value="-AoutRefMapFile=$PROJECT_DIR$/build/classes/java/main/morefurnaces-refmap.json -AdefaultObfuscationEnv=named:intermediary -Aquiet=true -AoutMapFileNamedIntermediary=$PROJECT_DIR$/build/loom-cache/mixin-map-net.fabricmc.yarn.1_21_10.1.21.10+build.3-v2.main.tiny -AinMapFileNamedIntermediary=$USER_HOME$/.gradle/caches/fabric-loom/1.21.10/net.fabricmc.yarn.1_21_10.1.21.10+build.3-v2/mappings.tiny" />
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
-      <module name="MoreFurnaces" options="-AoutRefMapFile=$PROJECT_DIR$/build/classes/java/main/morefurnaces-refmap.json -AdefaultObfuscationEnv=named:intermediary -Aquiet=true -AoutMapFileNamedIntermediary=$PROJECT_DIR$/build/loom-cache/mixin-map-net.fabricmc.yarn.1_21_6_pre4.1.21.6-pre4+build.1-v2.main.tiny -AinMapFileNamedIntermediary=$USER_HOME$/.gradle/caches/fabric-loom/1.21.6-pre4/net.fabricmc.yarn.1_21_6_pre4.1.21.6-pre4+build.1-v2/mappings.tiny" />
+      <module name="MoreFurnaces.test" options="-AoutRefMapFile=$PROJECT_DIR$/build/classes/java/test/test-morefurnaces-refmap.json -AdefaultObfuscationEnv=named:intermediary -Aquiet=true -AoutMapFileNamedIntermediary=$PROJECT_DIR$/build/loom-cache/mixin-map-net.fabricmc.yarn.1_21_10.1.21.10+build.3-v2.test.tiny -AinMapFileNamedIntermediary=$USER_HOME$/.gradle/caches/fabric-loom/1.21.10/net.fabricmc.yarn.1_21_10.1.21.10+build.3-v2/mappings.tiny" />
       <module name="morefurnaces.test" options="-AoutRefMapFile=$PROJECT_DIR$/build/classes/java/test/test-morefurnaces-refmap.json -AdefaultObfuscationEnv=named:intermediary -Aquiet=true -AoutMapFileNamedIntermediary=$PROJECT_DIR$/build/loom-cache/mixin-map-net.fabricmc.yarn.1_21_6_pre4.1.21.6-pre4+build.1-v2.test.tiny -AinMapFileNamedIntermediary=$USER_HOME$/.gradle/caches/fabric-loom/1.21.6-pre4/net.fabricmc.yarn.1_21_6_pre4.1.21.6-pre4+build.1-v2/mappings.tiny" />
-      <module name="pw.smto.MoreFurnaces.main" options="-AoutRefMapFile=$PROJECT_DIR$/build/classes/java/main/morefurnaces-refmap.json -AdefaultObfuscationEnv=named:intermediary -Aquiet=true -AoutMapFileNamedIntermediary=$PROJECT_DIR$/build/loom-cache/mixin-map-net.fabricmc.yarn.1_21_6_pre4.1.21.6-pre4+build.1-v2.main.tiny -AinMapFileNamedIntermediary=$USER_HOME$/.gradle/caches/fabric-loom/1.21.6-pre4/net.fabricmc.yarn.1_21_6_pre4.1.21.6-pre4+build.1-v2/mappings.tiny" />
     </option>
   </component>
 </project>
