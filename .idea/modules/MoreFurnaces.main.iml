@@ -13,10 +13,6 @@
     </facet>
   </component>
   <component name="McpModuleSettings">
-    <option name="minecraftVersion" value="1.21.3" />
-  </component>
-  <component name="NewModuleRootManager" inherit-compiler-output="true">
-    <exclude-output />
-    <orderEntry type="sourceFolder" forTests="false" />
+    <option name="minecraftVersion" value="1.21.8" />
   </component>
 </module>
