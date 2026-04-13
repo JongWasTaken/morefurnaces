@@ -4,29 +4,29 @@ import eu.pb4.polymer.blocks.api.BlockModelType;
 import eu.pb4.polymer.blocks.api.PolymerBlockModel;
 import eu.pb4.polymer.blocks.api.PolymerBlockResourceUtils;
 import eu.pb4.polymer.blocks.api.PolymerTexturedBlock;
-import net.minecraft.block.*;
-import net.minecraft.block.entity.BlockEntity;
-import net.minecraft.block.entity.BlockEntityTicker;
-import net.minecraft.block.entity.BlockEntityType;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.ItemStack;
-import net.minecraft.registry.Registries;
-import net.minecraft.registry.RegistryKey;
-import net.minecraft.registry.RegistryKeys;
-import net.minecraft.screen.NamedScreenHandlerFactory;
-import net.minecraft.server.world.ServerWorld;
-import net.minecraft.sound.BlockSoundGroup;
-import net.minecraft.stat.Stats;
-import net.minecraft.util.Identifier;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Direction;
-import net.minecraft.world.World;
-import net.minecraft.world.WorldView;
-import net.minecraft.world.block.WireOrientation;
+import net.fabricmc.fabric.api.networking.v1.context.PacketContext;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.Identifier;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.stats.Stats;
+import net.minecraft.world.MenuProvider;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LevelReader;
+import net.minecraft.world.level.block.*;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.entity.BlockEntityTicker;
+import net.minecraft.world.level.block.entity.BlockEntityType;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.redstone.Orientation;
 import org.jetbrains.annotations.Nullable;
 import pw.smto.morefurnaces.MoreFurnaces;
 import pw.smto.morefurnaces.api.MoreFurnacesContent;
-import xyz.nucleoid.packettweaker.PacketContext;
 
 public class CustomFurnaceBlock extends FurnaceBlock implements PolymerTexturedBlock, MoreFurnacesContent {
     private final BlockState baseStateNorth;
@@ -39,11 +39,11 @@ public class CustomFurnaceBlock extends FurnaceBlock implements PolymerTexturedB
     private final BlockState baseStateWestLit;
     private final Identifier id;
     private final int speedMultiplier;
-    private final BlockSoundGroup sound;
+    private final SoundType sound;
 
-    public CustomFurnaceBlock(Identifier id, int speedMultiplier, BlockSoundGroup sound)
+    public CustomFurnaceBlock(Identifier id, int speedMultiplier, SoundType sound)
     {
-        super(Settings.copy(Blocks.FURNACE).registryKey(RegistryKey.of(RegistryKeys.BLOCK, id)));
+        super(Properties.ofFullCopy(Blocks.FURNACE).setId(ResourceKey.create(Registries.BLOCK, id)));
         this.id = id;
         this.sound = sound;
         var left = PolymerBlockResourceUtils.getBlocksLeft(BlockModelType.FULL_BLOCK);
@@ -66,7 +66,7 @@ public class CustomFurnaceBlock extends FurnaceBlock implements PolymerTexturedB
     private BlockState makeBlockState(String suffix, int y) {
         return PolymerBlockResourceUtils.requestBlock(
                 BlockModelType.FULL_BLOCK,
-                PolymerBlockModel.of(Identifier.of(MoreFurnaces.MOD_ID, "block/" + this.id.getPath() + suffix), 0, y)
+                PolymerBlockModel.of(Identifier.fromNamespaceAndPath(MoreFurnaces.MOD_ID, "block/" + this.id.getPath() + suffix), 0, y)
         );
     }
 
@@ -77,23 +77,23 @@ public class CustomFurnaceBlock extends FurnaceBlock implements PolymerTexturedB
 
     @Nullable
     protected static <T extends BlockEntity> BlockEntityTicker<T> validateTicker2(
-            World world, BlockEntityType<T> givenType, BlockEntityType<? extends CustomFurnaceBlockEntity> expectedType
+            Level world, BlockEntityType<T> givenType, BlockEntityType<? extends CustomFurnaceBlockEntity> expectedType
     ) {
-        return world instanceof ServerWorld serverWorld
-                ? BlockWithEntity.validateTicker(givenType, expectedType, (unused, pos, state, blockEntity) -> CustomFurnaceBlockEntity.tick(serverWorld, pos, state, blockEntity))
+        return world instanceof ServerLevel serverWorld
+                ? BaseEntityBlock.createTickerHelper(givenType, expectedType, (unused, pos, state, blockEntity) -> CustomFurnaceBlockEntity.tick(serverWorld, pos, state, blockEntity))
                 : null;
     }
 
     @Nullable
     @Override
-    public <T extends BlockEntity> BlockEntityTicker<T> getTicker(World world, BlockState state, BlockEntityType<T> type) {
+    public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level world, BlockState state, BlockEntityType<T> type) {
         return CustomFurnaceBlock.validateTicker2(world, type, MoreFurnaces.BlockEntities.CUSTOM_FURNACE_ENTITY);
     }
 
     @Override
-    protected void neighborUpdate(BlockState state, World world, BlockPos pos, Block sourceBlock, @Nullable WireOrientation wireOrientation, boolean notify) {
+    protected void neighborChanged(BlockState state, Level world, BlockPos pos, Block sourceBlock, @Nullable Orientation wireOrientation, boolean notify) {
         if (world.getBlockEntity(pos) instanceof CustomFurnaceBlockEntity be) {
-            boolean bl = world.isReceivingRedstonePower(pos) || world.isReceivingRedstonePower(pos.up());
+            boolean bl = world.hasNeighborSignal(pos) || world.hasNeighborSignal(pos.above());
             boolean bl2 = be.getPowered();
             if (bl && !bl2) {
                 be.setPowered(true);
@@ -106,26 +106,26 @@ public class CustomFurnaceBlock extends FurnaceBlock implements PolymerTexturedB
     }
 
     @Override
-    public BlockEntity createBlockEntity(BlockPos pos, BlockState state) {
-        return new CustomFurnaceBlockEntity(pos, state, this.translationKey, this.speedMultiplier);
+    public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
+        return new CustomFurnaceBlockEntity(pos, state, this.descriptionId, this.speedMultiplier);
     }
 
     @Override
     public BlockState getPolymerBlockState(BlockState state, PacketContext context) {
-        if (state.get(AbstractFurnaceBlock.FACING) == Direction.NORTH) {
-            if (state.get(AbstractFurnaceBlock.LIT)) return this.baseStateNorthLit;
+        if (state.getValue(AbstractFurnaceBlock.FACING) == Direction.NORTH) {
+            if (state.getValue(AbstractFurnaceBlock.LIT)) return this.baseStateNorthLit;
             return this.baseStateNorth;
         }
-        if (state.get(AbstractFurnaceBlock.FACING) == Direction.EAST) {
-            if (state.get(AbstractFurnaceBlock.LIT)) return this.baseStateEastLit;
+        if (state.getValue(AbstractFurnaceBlock.FACING) == Direction.EAST) {
+            if (state.getValue(AbstractFurnaceBlock.LIT)) return this.baseStateEastLit;
             return this.baseStateEast;
         }
-        if (state.get(AbstractFurnaceBlock.FACING) == Direction.SOUTH) {
-            if (state.get(AbstractFurnaceBlock.LIT)) return this.baseStateSouthLit;
+        if (state.getValue(AbstractFurnaceBlock.FACING) == Direction.SOUTH) {
+            if (state.getValue(AbstractFurnaceBlock.LIT)) return this.baseStateSouthLit;
             return this.baseStateSouth;
         }
-        if (state.get(AbstractFurnaceBlock.FACING) == Direction.WEST) {
-            if (state.get(AbstractFurnaceBlock.LIT)) return this.baseStateWestLit;
+        if (state.getValue(AbstractFurnaceBlock.FACING) == Direction.WEST) {
+            if (state.getValue(AbstractFurnaceBlock.LIT)) return this.baseStateWestLit;
             return this.baseStateWest;
         }
 
@@ -134,35 +134,35 @@ public class CustomFurnaceBlock extends FurnaceBlock implements PolymerTexturedB
 
     @Override
     public BlockState getPolymerBreakEventBlockState(BlockState state, PacketContext context) {
-        return Blocks.FURNACE.getDefaultState();
+        return Blocks.FURNACE.defaultBlockState();
     }
     @Override
-    public BlockSoundGroup getSoundGroup(BlockState state) {
+    public SoundType getSoundType(BlockState state) {
         return this.sound;
     }
 
     @Override
-    protected ItemStack getPickStack(WorldView world, BlockPos pos, BlockState state, boolean includeData) {
-        return new ItemStack(Registries.BLOCK.get(this.id));
+    protected ItemStack getCloneItemStack(LevelReader world, BlockPos pos, BlockState state, boolean includeData) {
+        return new ItemStack(BuiltInRegistries.BLOCK.getValue(this.id));
     }
 
     @Override
-    protected void openScreen(World world, BlockPos pos, PlayerEntity player) {
+    protected void openContainer(Level world, BlockPos pos, Player player) {
         BlockEntity blockEntity = world.getBlockEntity(pos);
         if (blockEntity instanceof CustomFurnaceBlockEntity) {
-            player.openHandledScreen((NamedScreenHandlerFactory)blockEntity);
-            player.incrementStat(Stats.INTERACT_WITH_FURNACE);
+            player.openMenu((MenuProvider)blockEntity);
+            player.awardStat(Stats.INTERACT_WITH_FURNACE);
         }
     }
     @Override
-    public BlockState onBreak(World world, BlockPos pos, BlockState state, PlayerEntity player) {
+    public BlockState playerWillDestroy(Level world, BlockPos pos, BlockState state, Player player) {
         if (world.getBlockEntity(pos) instanceof CustomFurnaceBlockEntity ent) {
-            if (!world.isClient()) {
-                player.giveOrDropStack(ent.getModifierModule().getItemStack());
+            if (!world.isClientSide()) {
+                player.handleExtraItemsCreatedOnUse(ent.getModifierModule().getItemStack());
                 ent.killItemDisplay();
             }
         }
-        return super.onBreak(world, pos, state, player);
+        return super.playerWillDestroy(world, pos, state, player);
     }
 
 }

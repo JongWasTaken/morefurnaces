@@ -1,9 +1,9 @@
 package pw.smto.morefurnaces.module;
 
-import net.minecraft.item.ItemStack;
 import pw.smto.morefurnaces.MoreFurnaces;
 
 import java.util.function.Function;
+import net.minecraft.world.item.ItemStack;
 
 /**
  * Modules starting with "SPEED" increase speed and fuel consumption.<br>
@@ -41,28 +41,28 @@ public enum ModifierModule {
     public ItemStack getItemStack() {
         switch(this) {
             case SPEED_2X -> {
-                return MoreFurnaces.Items.SPEED_2X_MODIFIER_MODULE.getDefaultStack();
+                return MoreFurnaces.Items.SPEED_2X_MODIFIER_MODULE.getDefaultInstance();
             }
             case FUEL_2X -> {
-                return MoreFurnaces.Items.FUEL_2X_MODIFIER_MODULE.getDefaultStack();
+                return MoreFurnaces.Items.FUEL_2X_MODIFIER_MODULE.getDefaultInstance();
             }
             case SPEED_3X -> {
-                return MoreFurnaces.Items.SPEED_3X_MODIFIER_MODULE.getDefaultStack();
+                return MoreFurnaces.Items.SPEED_3X_MODIFIER_MODULE.getDefaultInstance();
             }
             case FUEL_3X -> {
-                return MoreFurnaces.Items.FUEL_3X_MODIFIER_MODULE.getDefaultStack();
+                return MoreFurnaces.Items.FUEL_3X_MODIFIER_MODULE.getDefaultInstance();
             }
             case SPEED_4X -> {
-                return MoreFurnaces.Items.SPEED_4X_MODIFIER_MODULE.getDefaultStack();
+                return MoreFurnaces.Items.SPEED_4X_MODIFIER_MODULE.getDefaultInstance();
             }
             case FUEL_4X -> {
-                return MoreFurnaces.Items.FUEL_4X_MODIFIER_MODULE.getDefaultStack();
+                return MoreFurnaces.Items.FUEL_4X_MODIFIER_MODULE.getDefaultInstance();
             }
             case SPEED_5X -> {
-                return MoreFurnaces.Items.SPEED_5X_MODIFIER_MODULE.getDefaultStack();
+                return MoreFurnaces.Items.SPEED_5X_MODIFIER_MODULE.getDefaultInstance();
             }
             case FUEL_5X -> {
-                return MoreFurnaces.Items.FUEL_5X_MODIFIER_MODULE.getDefaultStack();
+                return MoreFurnaces.Items.FUEL_5X_MODIFIER_MODULE.getDefaultInstance();
             }
 
         }

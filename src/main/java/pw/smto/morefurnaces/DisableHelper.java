@@ -1,9 +1,8 @@
 package pw.smto.morefurnaces;
 
-import net.minecraft.item.Item;
-
 import java.lang.reflect.Field;
 import java.util.HashMap;
+import net.minecraft.world.item.Item;
 
 public class DisableHelper {
     private static final HashMap<Item, Field> ITEM_FIELD_HASH_MAP = new HashMap<>() {{

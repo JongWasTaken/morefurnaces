@@ -1,64 +1,67 @@
 package pw.smto.morefurnaces.item;
 
-import net.minecraft.component.type.TooltipDisplayComponent;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.ItemUsageContext;
-import net.minecraft.item.Items;
-import net.minecraft.item.tooltip.TooltipType;
-import net.minecraft.registry.RegistryKey;
-import net.minecraft.registry.RegistryKeys;
-import net.minecraft.sound.SoundCategory;
-import net.minecraft.sound.SoundEvents;
-import net.minecraft.text.Text;
-import net.minecraft.util.ActionResult;
-import net.minecraft.util.Formatting;
-import net.minecraft.util.Identifier;
-import net.minecraft.util.Rarity;
+import eu.pb4.polymer.core.api.item.PolymerItem;
+import net.fabricmc.fabric.api.networking.v1.context.PacketContext;
+import net.minecraft.core.HolderLookup;
+import org.jspecify.annotations.Nullable;
 import pw.smto.morefurnaces.DisableHelper;
 import pw.smto.morefurnaces.module.ModifierModule;
 import pw.smto.morefurnaces.api.MoreFurnacesContent;
 import pw.smto.morefurnaces.block.CustomFurnaceBlockEntity;
-import xyz.nucleoid.packettweaker.PacketContext;
 
 import java.util.function.Consumer;
+import net.minecraft.ChatFormatting;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.network.chat.Component;
+import net.minecraft.resources.Identifier;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.item.Rarity;
+import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.world.item.component.TooltipDisplay;
+import net.minecraft.world.item.context.UseOnContext;
 
-public class FurnaceModuleItem extends Item implements eu.pb4.polymer.core.api.item.PolymerItem, MoreFurnacesContent {
+public class FurnaceModuleItem extends Item implements PolymerItem, MoreFurnacesContent {
 
     private final Identifier id;
     private final ModifierModule module;
 
     public FurnaceModuleItem(Identifier id, ModifierModule module) {
-        super(new Settings()
+        super(new Properties()
                 .rarity(Rarity.COMMON)
-                .registryKey(RegistryKey.of(RegistryKeys.ITEM, id)));
+                .setId(ResourceKey.create(Registries.ITEM, id)));
         this.id = id;
         this.module = module;
     }
 
     @Override
-    public ActionResult useOnBlock(ItemUsageContext context) {
-        if (context.getPlayer() == null) return ActionResult.PASS;
-        if (context.getWorld().getBlockEntity(context.getBlockPos()) instanceof CustomFurnaceBlockEntity entity) {
+    public InteractionResult useOn(UseOnContext context) {
+        if (context.getPlayer() == null) return InteractionResult.PASS;
+        if (context.getLevel().getBlockEntity(context.getClickedPos()) instanceof CustomFurnaceBlockEntity entity) {
             if (entity.getModifierModule() != ModifierModule.NO_MODULE) {
-                context.getPlayer().sendMessage(Text.translatable("item.morefurnaces.furnace_module.invalid").formatted(Formatting.RED), true);
-                return ActionResult.PASS;
+                context.getPlayer().sendOverlayMessage(Component.translatable("item.morefurnaces.furnace_module.invalid").withStyle(ChatFormatting.RED));
+                return InteractionResult.PASS;
             };
             entity.setModifierModule(this.module);
-            context.getWorld().playSound(context.getPlayer(), context.getBlockPos(), SoundEvents.BLOCK_ANVIL_USE, SoundCategory.BLOCKS, 1.0F, 1.0F);
-            context.getStack().decrement(1);
-            context.getPlayer().sendMessage(Text.translatable("item.morefurnaces.furnace_module.success").formatted(Formatting.GREEN), true);
-            return ActionResult.SUCCESS;
+            context.getLevel().playSound(context.getPlayer(), context.getClickedPos(), SoundEvents.ANVIL_USE, SoundSource.BLOCKS, 1.0F, 1.0F);
+            context.getItemInHand().shrink(1);
+            context.getPlayer().sendOverlayMessage(Component.translatable("item.morefurnaces.furnace_module.success").withStyle(ChatFormatting.GREEN));
+            return InteractionResult.SUCCESS;
         }
-        return ActionResult.PASS;
+        return InteractionResult.PASS;
     }
 
     @Override
-    public void appendTooltip(ItemStack stack, Item.TooltipContext context, TooltipDisplayComponent displayComponent, Consumer<Text> textConsumer, TooltipType type) {
-        textConsumer.accept(Text.translatable(stack.getItem().getTranslationKey() + ".description").formatted(Formatting.GRAY));
-        textConsumer.accept(Text.translatable("tooltip.morefurnaces.module_tutorial").formatted(Formatting.GRAY));
+    public void appendHoverText(ItemStack stack, Item.TooltipContext context, TooltipDisplay displayComponent, Consumer<Component> textConsumer, TooltipFlag type) {
+        textConsumer.accept(Component.translatable(stack.getItem().getDescriptionId() + ".description").withStyle(ChatFormatting.GRAY));
+        textConsumer.accept(Component.translatable("tooltip.morefurnaces.module_tutorial").withStyle(ChatFormatting.GRAY));
         if (DisableHelper.isDisabled(this)) {
-            textConsumer.accept(Text.translatable("tooltip.morefurnaces.disabled").formatted(Formatting.RED));
+            textConsumer.accept(Component.translatable("tooltip.morefurnaces.disabled").withStyle(ChatFormatting.RED));
         }
     }
 
@@ -69,7 +72,7 @@ public class FurnaceModuleItem extends Item implements eu.pb4.polymer.core.api.i
     }
 
     @Override
-    public Identifier getPolymerItemModel(ItemStack itemStack, PacketContext context) {
+    public @Nullable Identifier getPolymerItemModel(ItemStack stack, PacketContext context, HolderLookup.Provider lookup) {
         return this.id;
     }
 

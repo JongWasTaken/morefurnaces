@@ -1,0 +1,466 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="dff6dca4-1f24-4d22-b678-8f7ed31188b1" name="Changes" comment="1.21.8">
+      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/AndroidProjectSystem.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/copilot.data.migration.agent.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/copilot.data.migration.ask2agent.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/copilot.data.migration.edit.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/jarRepositories.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules/MoreFurnaces.main.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules/MoreFurnaces.test.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules/morefurnaces.main.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules/morefurnaces.test.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules/pw.smto.MoreFurnaces.main.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules/pw.smto.MoreFurnaces.test.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/runConfigurations/Minecraft_Client.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/runConfigurations/Minecraft_Server.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/uiDesigner.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gradle.properties" beforeDir="false" afterPath="$PROJECT_DIR$/gradle.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pw/smto/morefurnaces/DisableHelper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pw/smto/morefurnaces/DisableHelper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pw/smto/morefurnaces/MoreFurnaces.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pw/smto/morefurnaces/MoreFurnaces.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pw/smto/morefurnaces/api/MoreFurnacesContent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pw/smto/morefurnaces/api/MoreFurnacesContent.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pw/smto/morefurnaces/block/CustomFurnaceBlock.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pw/smto/morefurnaces/block/CustomFurnaceBlock.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pw/smto/morefurnaces/block/CustomFurnaceBlockEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pw/smto/morefurnaces/block/CustomFurnaceBlockEntity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pw/smto/morefurnaces/item/FurnaceModuleItem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pw/smto/morefurnaces/item/FurnaceModuleItem.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pw/smto/morefurnaces/item/GenericBlockItem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pw/smto/morefurnaces/item/GenericBlockItem.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pw/smto/morefurnaces/mixin/FurnaceOutputSlotMixin.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pw/smto/morefurnaces/mixin/FurnaceOutputSlotMixin.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pw/smto/morefurnaces/mixin/ShapelessRecipeMixin.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pw/smto/morefurnaces/mixin/ShapelessRecipeMixin.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pw/smto/morefurnaces/module/ModifierModule.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pw/smto/morefurnaces/module/ModifierModule.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/fabric.mod.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fabric.mod.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/morefurnaces.accesswidener" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/morefurnaces.accesswidener" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="CopilotPersistence">
+    <persistenceIdMap>
+      <entry key="_/home/jong/Development/MinecraftModding/MoreFurnaces" value="2uUhDYUiTUH8AshUX1VFMhJUTpg" />
+    </persistenceIdMap>
+  </component>
+  <component name="CopilotUserSelectedModel">
+    <selectedModels>
+      <entry key="edit-panel" value="GPT-5 mini" />
+      <entry key="chat-panel" value="GPT-5 mini" />
+      <entry key="agent-panel" value="GPT-5 mini" />
+    </selectedModels>
+  </component>
+  <component name="ExternalProjectsData">
+    <projectState path="$PROJECT_DIR$">
+      <ProjectState />
+    </projectState>
+  </component>
+  <component name="ExternalProjectsManager">
+    <system id="GRADLE">
+      <state>
+        <task path="$PROJECT_DIR$">
+          <activation />
+        </task>
+        <projects_view>
+          <tree_state>
+            <expand>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="MoreFurnaces" type="f1a62948:ProjectNode" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="MoreFurnaces" type="f1a62948:ProjectNode" />
+                <item name="Tasks" type="e4a08cd1:TasksNode" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="MoreFurnaces" type="f1a62948:ProjectNode" />
+                <item name="Tasks" type="e4a08cd1:TasksNode" />
+                <item name="build" type="c8890929:TasksNode$1" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="MoreFurnaces" type="f1a62948:ProjectNode" />
+                <item name="Tasks" type="e4a08cd1:TasksNode" />
+                <item name="fabric" type="c8890929:TasksNode$1" />
+              </path>
+            </expand>
+            <select />
+          </tree_state>
+        </projects_view>
+      </state>
+    </system>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="1.21.8" />
+      </map>
+    </option>
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {}
+}</component>
+  <component name="GitHubPullRequestState">{
+  &quot;prStates&quot;: []
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/JongWasTaken/morefurnaces/&quot;,
+    &quot;accountId&quot;: &quot;59078f81-e727-4521-98f3-a568683903e7&quot;
+  }
+}</component>
+  <component name="ProjectColorInfo">{
+  &quot;customColor&quot;: &quot;&quot;,
+  &quot;associatedIndex&quot;: 5
+}</component>
+  <component name="ProjectId" id="2uUhDYUiTUH8AshUX1VFMhJUTpg" />
+  <component name="ProjectViewState">
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Gradle.Download Sources.executor": "Run",
+    "Gradle.MoreFurnaces [build].executor": "Run",
+    "Gradle.MoreFurnaces [clean].executor": "Run",
+    "Gradle.MoreFurnaces [genSourcesWithVineflower].executor": "Run",
+    "Gradle.MoreFurnaces [jar].executor": "Run",
+    "Gradle.MoreFurnaces [runClient].executor": "Run",
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "RunOnceActivity.typescript.service.memoryLimit.init": "true",
+    "codeWithMe.voiceChat.enabledByDefault": "false",
+    "com.codeium.enabled": "true",
+    "git-widget-placeholder": "master",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "/home/jong/Development/MinecraftModding/MoreFurnaces/src/main/resources/data/morefurnaces/recipe",
+    "settings.editor.selected.configurable": "reference.settingsdialog.project.gradle"
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/main/resources/data/morefurnaces/recipe" />
+      <recent name="$PROJECT_DIR$/src/main/resources/assets/morefurnaces/models/item" />
+      <recent name="$PROJECT_DIR$/src/main/resources/assets/morefurnaces/textures/item" />
+      <recent name="$PROJECT_DIR$/src/main/resources/assets/morefurnaces/items" />
+    </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="pw.smto.morefurnaces.mixin" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Gradle.MoreFurnaces [jar]">
+    <configuration name="MoreFurnaces [build]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value="build" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <ExternalSystemDebugDisabled>false</ExternalSystemDebugDisabled>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <RunAsTest>false</RunAsTest>
+      <GradleProfilingDisabled>false</GradleProfilingDisabled>
+      <GradleCoverageDisabled>false</GradleCoverageDisabled>
+      <method v="2" />
+    </configuration>
+    <configuration name="MoreFurnaces [clean]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value="clean" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <ExternalSystemDebugDisabled>false</ExternalSystemDebugDisabled>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <RunAsTest>false</RunAsTest>
+      <GradleProfilingDisabled>false</GradleProfilingDisabled>
+      <GradleCoverageDisabled>false</GradleCoverageDisabled>
+      <method v="2" />
+    </configuration>
+    <configuration name="MoreFurnaces [genSourcesWithVineflower]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value="genSourcesWithVineflower" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <ExternalSystemDebugDisabled>false</ExternalSystemDebugDisabled>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <RunAsTest>false</RunAsTest>
+      <GradleProfilingDisabled>false</GradleProfilingDisabled>
+      <GradleCoverageDisabled>false</GradleCoverageDisabled>
+      <method v="2" />
+    </configuration>
+    <configuration name="MoreFurnaces [jar]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value="jar" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <ExternalSystemDebugDisabled>false</ExternalSystemDebugDisabled>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <RunAsTest>false</RunAsTest>
+      <GradleProfilingDisabled>false</GradleProfilingDisabled>
+      <GradleCoverageDisabled>false</GradleCoverageDisabled>
+      <method v="2" />
+    </configuration>
+    <configuration name="MoreFurnaces [runClient]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value="runClient" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <ExternalSystemDebugDisabled>false</ExternalSystemDebugDisabled>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <RunAsTest>false</RunAsTest>
+      <GradleProfilingDisabled>false</GradleProfilingDisabled>
+      <GradleCoverageDisabled>false</GradleCoverageDisabled>
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Gradle.MoreFurnaces [jar]" />
+        <item itemvalue="Gradle.MoreFurnaces [build]" />
+        <item itemvalue="Gradle.MoreFurnaces [runClient]" />
+        <item itemvalue="Gradle.MoreFurnaces [genSourcesWithVineflower]" />
+        <item itemvalue="Gradle.MoreFurnaces [clean]" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-jdk-30f59d01ecdd-26cb7f24e5b0-intellij.indexing.shared.core-IU-253.29346.240" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="dff6dca4-1f24-4d22-b678-8f7ed31188b1" name="Changes" comment="" />
+      <created>1742308941706</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1742308941706</updated>
+    </task>
+    <task id="LOCAL-00001" summary="Make furnaces drop their items when broken, fixes #2">
+      <option name="closed" value="true" />
+      <created>1742309412331</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1742309412331</updated>
+    </task>
+    <task id="LOCAL-00002" summary="Make furnaces drop their items when broken, fixes #2">
+      <option name="closed" value="true" />
+      <created>1742309465670</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1742309465670</updated>
+    </task>
+    <task id="LOCAL-00003" summary="Make furnaces drop their items when broken, fixes #2">
+      <option name="closed" value="true" />
+      <created>1742309772376</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1742309772376</updated>
+    </task>
+    <task id="LOCAL-00004" summary="Bump version">
+      <option name="closed" value="true" />
+      <created>1742309853020</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1742309853020</updated>
+    </task>
+    <task id="LOCAL-00005" summary="Bump version">
+      <option name="closed" value="true" />
+      <created>1742309876531</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1742309876531</updated>
+    </task>
+    <task id="LOCAL-00006" summary="Finalize 1.21.5 Port">
+      <option name="closed" value="true" />
+      <created>1742933554701</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1742933554701</updated>
+    </task>
+    <task id="LOCAL-00007" summary="1.2.0">
+      <option name="closed" value="true" />
+      <created>1743072618139</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1743072618139</updated>
+    </task>
+    <task id="LOCAL-00008" summary="1.21.6 port">
+      <option name="closed" value="true" />
+      <created>1749648215002</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1749648215002</updated>
+    </task>
+    <task id="LOCAL-00009" summary="1.21.6">
+      <option name="closed" value="true" />
+      <created>1765321350222</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1765321350223</updated>
+    </task>
+    <task id="LOCAL-00010" summary="They forgot to update polymer ;)">
+      <option name="closed" value="true" />
+      <created>1765322134950</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1765322134950</updated>
+    </task>
+    <task id="LOCAL-00011" summary="1.21.10, again">
+      <option name="closed" value="true" />
+      <created>1768404896712</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1768404896712</updated>
+    </task>
+    <task id="LOCAL-00012" summary="1.21.11">
+      <option name="closed" value="true" />
+      <created>1768405000080</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1768405000080</updated>
+    </task>
+    <task id="LOCAL-00013" summary="1.21.8">
+      <option name="closed" value="true" />
+      <created>1768405115420</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1768405115420</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="UnknownFeatures">
+    <option featureType="com.intellij.fileTypeFactory" implementationName="*.conf" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Make furnaces drop their items when broken, fixes #2" />
+    <MESSAGE value="Bump version" />
+    <MESSAGE value="Finalize 1.21.5 Port" />
+    <MESSAGE value="1.2.0" />
+    <MESSAGE value="1.21.6 port" />
+    <MESSAGE value="1.21.6" />
+    <MESSAGE value="They forgot to update polymer ;)" />
+    <MESSAGE value="1.21.10, again" />
+    <MESSAGE value="1.21.11" />
+    <MESSAGE value="1.21.8" />
+    <option name="LAST_COMMIT_MESSAGE" value="1.21.8" />
+  </component>
+  <component name="github-copilot-workspace">
+    <instructionFileLocations>
+      <option value=".github/instructions" />
+    </instructionFileLocations>
+    <promptFileLocations>
+      <option value=".github/prompts" />
+    </promptFileLocations>
+  </component>
+</project>

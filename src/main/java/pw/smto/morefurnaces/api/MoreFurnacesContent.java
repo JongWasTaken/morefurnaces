@@ -1,6 +1,6 @@
 package pw.smto.morefurnaces.api;
 
-import net.minecraft.util.Identifier;
+import net.minecraft.resources.Identifier;
 
 public interface MoreFurnacesContent {
     default Identifier getIdentifier() {

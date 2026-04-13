@@ -1,10 +1,11 @@
 package pw.smto.morefurnaces.mixin;
 
-import net.minecraft.item.ItemStack;
-import net.minecraft.recipe.ShapelessRecipe;
-import net.minecraft.recipe.input.CraftingRecipeInput;
-import net.minecraft.registry.RegistryWrapper;
-import net.minecraft.world.World;
+import net.minecraft.core.HolderLookup;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.ItemStackTemplate;
+import net.minecraft.world.item.crafting.CraftingInput;
+import net.minecraft.world.item.crafting.ShapelessRecipe;
+import net.minecraft.world.level.Level;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -16,19 +17,19 @@ import pw.smto.morefurnaces.DisableHelper;
 @Mixin(ShapelessRecipe.class)
 public abstract class ShapelessRecipeMixin {
     @Shadow @Final
-    ItemStack result;
+    private ItemStackTemplate result;
 
-    @Inject(method = "matches(Lnet/minecraft/recipe/input/CraftingRecipeInput;Lnet/minecraft/world/World;)Z", at = @At("HEAD"), cancellable = true)
-    public void matches(CraftingRecipeInput craftingRecipeInput, World world, CallbackInfoReturnable<Boolean> cir) {
-        if (DisableHelper.isDisabled(this.result.getItem())) {
+    @Inject(method = "matches(Lnet/minecraft/world/item/crafting/CraftingInput;Lnet/minecraft/world/level/Level;)Z", at = @At("HEAD"), cancellable = true)
+    public void matches(CraftingInput input, Level level, CallbackInfoReturnable<Boolean> cir) {
+        if (DisableHelper.isDisabled(this.result.item().value())) {
             cir.setReturnValue(false);
             cir.cancel();
         }
     }
 
-    @Inject(method = "craft(Lnet/minecraft/recipe/input/CraftingRecipeInput;Lnet/minecraft/registry/RegistryWrapper$WrapperLookup;)Lnet/minecraft/item/ItemStack;", at = @At("HEAD"), cancellable = true)
-    public void craft(CraftingRecipeInput craftingRecipeInput, RegistryWrapper.WrapperLookup wrapperLookup, CallbackInfoReturnable<ItemStack> cir) {
-        if (DisableHelper.isDisabled(this.result.getItem())) {
+    @Inject(method = "assemble(Lnet/minecraft/world/item/crafting/CraftingInput;)Lnet/minecraft/world/item/ItemStack;", at = @At("HEAD"), cancellable = true)
+    public void craft(CraftingInput input, CallbackInfoReturnable<ItemStack> cir) {
+        if (DisableHelper.isDisabled(this.result.item().value())) {
             cir.setReturnValue(ItemStack.EMPTY);
             cir.cancel();
         }

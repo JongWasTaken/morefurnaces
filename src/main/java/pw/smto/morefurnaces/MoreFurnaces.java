@@ -4,24 +4,25 @@ import dev.smto.simpleconfig.SimpleConfig;
 import dev.smto.simpleconfig.api.ConfigAnnotations;
 import dev.smto.simpleconfig.api.ConfigLogger;
 import eu.pb4.polymer.core.api.block.PolymerBlockUtils;
-import eu.pb4.polymer.core.api.item.PolymerItemGroupUtils;
+import eu.pb4.polymer.core.api.item.PolymerCreativeModeTabUtils;
 import eu.pb4.polymer.resourcepack.api.PolymerResourcePackUtils;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.object.builder.v1.block.entity.FabricBlockEntityTypeBuilder;
 import net.fabricmc.fabric.api.resource.ResourceManagerHelper;
 import net.fabricmc.fabric.api.resource.SimpleSynchronousResourceReloadListener;
 import net.fabricmc.loader.api.FabricLoader;
-import net.minecraft.block.Block;
-import net.minecraft.block.entity.BlockEntityType;
-import net.minecraft.item.*;
-import net.minecraft.registry.Registries;
-import net.minecraft.registry.Registry;
-import net.minecraft.resource.ResourceManager;
-import net.minecraft.resource.ResourceReloader;
-import net.minecraft.resource.ResourceType;
-import net.minecraft.sound.BlockSoundGroup;
-import net.minecraft.text.Text;
-import net.minecraft.util.Identifier;
+import net.minecraft.core.Registry;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.network.chat.Component;
+import net.minecraft.resources.Identifier;
+import net.minecraft.server.packs.PackType;
+import net.minecraft.server.packs.resources.ResourceManager;
+import net.minecraft.world.item.BlockItem;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.SoundType;
+import net.minecraft.world.level.block.entity.BlockEntityType;
 import org.slf4j.LoggerFactory;
 import pw.smto.morefurnaces.api.MoreFurnacesContent;
 import pw.smto.morefurnaces.block.CustomFurnaceBlock;
@@ -47,18 +48,18 @@ public class MoreFurnaces implements ModInitializer {
 		public void warn(String message) { MoreFurnaces.LOGGER.warn(message); }
 	});
 	public static Identifier id(String path) {
-		return Identifier.of(MoreFurnaces.MOD_ID, path);
+		return Identifier.fromNamespaceAndPath(MoreFurnaces.MOD_ID, path);
 	}
 
 	@Override
 	public void onInitialize() {
-		ResourceManagerHelper.get(ResourceType.SERVER_DATA).registerReloadListener(new SimpleSynchronousResourceReloadListener() {
+		ResourceManagerHelper.get(PackType.SERVER_DATA).registerReloadListener(new SimpleSynchronousResourceReloadListener() {
 			@Override
 			public Identifier getFabricId() {
 				return MoreFurnaces.id("config_reload");
 			}
 			@Override
-			public void reload(ResourceManager manager) {
+			public void onResourceManagerReload(ResourceManager manager) {
                 MoreFurnaces.CONFIG_MANAGER.read();
 			}
 		});
@@ -69,7 +70,7 @@ public class MoreFurnaces implements ModInitializer {
 		for (Field field : Blocks.class.getFields()) {
 			try {
 				if (field.get(null) instanceof MoreFurnacesContent block) {
-					Registry.register(Registries.BLOCK, block.getIdentifier(), (Block)block);
+					Registry.register(BuiltInRegistries.BLOCK, block.getIdentifier(), (Block)block);
 				}
 			} catch (Throwable ignored) {
                 MoreFurnaces.LOGGER.error("Failed to register block: {}", field.getName());
@@ -78,7 +79,7 @@ public class MoreFurnaces implements ModInitializer {
 
 		for (Field field : BlockEntities.class.getFields()) {
 			try {
-				Registry.register(Registries.BLOCK_ENTITY_TYPE, MoreFurnaces.id(field.getName().toLowerCase(Locale.ROOT)), (BlockEntityType<?>) field.get(null));
+				Registry.register(BuiltInRegistries.BLOCK_ENTITY_TYPE, MoreFurnaces.id(field.getName().toLowerCase(Locale.ROOT)), (BlockEntityType<?>) field.get(null));
 				PolymerBlockUtils.registerBlockEntity((BlockEntityType<?>) field.get(null));
 			} catch (Throwable ignored) {
                 MoreFurnaces.LOGGER.error("Failed to register block entity type: {}", field.getName());
@@ -91,7 +92,7 @@ public class MoreFurnaces implements ModInitializer {
 					Identifier id = MoreFurnaces.id(field.getName().toLowerCase(Locale.ROOT));
 					if (item instanceof MoreFurnacesContent b) {
 						if (b.getIdentifier().equals(id)) {
-							Registry.register(Registries.ITEM, id, item);
+							Registry.register(BuiltInRegistries.ITEM, id, item);
 						}
 					}
 				}
@@ -100,35 +101,35 @@ public class MoreFurnaces implements ModInitializer {
 			}
         }
 
-		Registries.ITEM.addAlias(MoreFurnaces.id("double_furnace_module"), MoreFurnaces.id("speed_2x_modifier_module"));
-		Registries.ITEM.addAlias(MoreFurnaces.id("half_furnace_module"), MoreFurnaces.id("fuel_2x_modifier_module"));
+		BuiltInRegistries.ITEM.addAlias(MoreFurnaces.id("double_furnace_module"), MoreFurnaces.id("speed_2x_modifier_module"));
+		BuiltInRegistries.ITEM.addAlias(MoreFurnaces.id("half_furnace_module"), MoreFurnaces.id("fuel_2x_modifier_module"));
 
-		PolymerItemGroupUtils.registerPolymerItemGroup(Identifier.of(MoreFurnaces.MOD_ID,"items"), PolymerItemGroupUtils.builder()
+		PolymerCreativeModeTabUtils.registerPolymerCreativeModeTab(Identifier.fromNamespaceAndPath(MoreFurnaces.MOD_ID,"items"), PolymerCreativeModeTabUtils.builder()
 			.icon(() -> new ItemStack(Items.IRON_FURNACE))
-			.displayName(Text.of("More Furnaces"))
-			.entries((context, entries) -> {
-				entries.add(Items.IRON_FURNACE);
-				entries.add(Items.GOLD_FURNACE);
-				entries.add(Items.DIAMOND_FURNACE);
-				entries.add(Items.NETHERITE_FURNACE);
-				entries.add(Items.SPEED_2X_MODIFIER_MODULE);
-				entries.add(Items.FUEL_2X_MODIFIER_MODULE);
-				entries.add(Items.SPEED_3X_MODIFIER_MODULE);
-				entries.add(Items.FUEL_3X_MODIFIER_MODULE);
-				entries.add(Items.SPEED_4X_MODIFIER_MODULE);
-				entries.add(Items.FUEL_4X_MODIFIER_MODULE);
-				entries.add(Items.SPEED_5X_MODIFIER_MODULE);
-				entries.add(Items.FUEL_5X_MODIFIER_MODULE);
+			.title(Component.nullToEmpty("More Furnaces"))
+			.displayItems((context, entries) -> {
+				entries.accept(Items.IRON_FURNACE);
+				entries.accept(Items.GOLD_FURNACE);
+				entries.accept(Items.DIAMOND_FURNACE);
+				entries.accept(Items.NETHERITE_FURNACE);
+				entries.accept(Items.SPEED_2X_MODIFIER_MODULE);
+				entries.accept(Items.FUEL_2X_MODIFIER_MODULE);
+				entries.accept(Items.SPEED_3X_MODIFIER_MODULE);
+				entries.accept(Items.FUEL_3X_MODIFIER_MODULE);
+				entries.accept(Items.SPEED_4X_MODIFIER_MODULE);
+				entries.accept(Items.FUEL_4X_MODIFIER_MODULE);
+				entries.accept(Items.SPEED_5X_MODIFIER_MODULE);
+				entries.accept(Items.FUEL_5X_MODIFIER_MODULE);
 			}).build()
 		);
 
         MoreFurnaces.LOGGER.info("MoreFurnaces loaded!");
 	}
 	public static class Blocks {
-		public static Block IRON_FURNACE = new CustomFurnaceBlock(MoreFurnaces.id("iron_furnace"), 2, BlockSoundGroup.METAL);
-		public static Block GOLD_FURNACE = new CustomFurnaceBlock(MoreFurnaces.id("gold_furnace"), 3, BlockSoundGroup.METAL);
-		public static Block DIAMOND_FURNACE = new CustomFurnaceBlock(MoreFurnaces.id("diamond_furnace"), 4, BlockSoundGroup.METAL);
-		public static Block NETHERITE_FURNACE = new CustomFurnaceBlock(MoreFurnaces.id("netherite_furnace"), 6, BlockSoundGroup.NETHERITE);
+		public static Block IRON_FURNACE = new CustomFurnaceBlock(MoreFurnaces.id("iron_furnace"), 2, SoundType.METAL);
+		public static Block GOLD_FURNACE = new CustomFurnaceBlock(MoreFurnaces.id("gold_furnace"), 3, SoundType.METAL);
+		public static Block DIAMOND_FURNACE = new CustomFurnaceBlock(MoreFurnaces.id("diamond_furnace"), 4, SoundType.METAL);
+		public static Block NETHERITE_FURNACE = new CustomFurnaceBlock(MoreFurnaces.id("netherite_furnace"), 6, SoundType.NETHERITE_BLOCK);
 	}
 
 	public static class Items {
