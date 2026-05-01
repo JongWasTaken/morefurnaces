@@ -341,7 +341,8 @@ public class CustomFurnaceBlockEntity extends BaseContainerBlockEntity implement
                         Item item = itemStack.getItem();
                         itemStack.shrink(1);
                         if (itemStack.isEmpty()) {
-                            blockEntity.inventory.set(1, item.getCraftingRemainder().create());
+                            var remainder = item.getCraftingRemainder();
+                            blockEntity.inventory.set(1, remainder != null ? remainder.create() : ItemStack.EMPTY);
                         }
                     }
                 }

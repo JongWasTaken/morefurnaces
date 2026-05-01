@@ -4,42 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="dff6dca4-1f24-4d22-b678-8f7ed31188b1" name="Changes" comment="1.21.8">
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/AndroidProjectSystem.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/copilot.data.migration.agent.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/copilot.data.migration.ask2agent.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/copilot.data.migration.edit.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/jarRepositories.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules/MoreFurnaces.main.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules/MoreFurnaces.test.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules/morefurnaces.main.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules/morefurnaces.test.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules/pw.smto.MoreFurnaces.main.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules/pw.smto.MoreFurnaces.test.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/runConfigurations/Minecraft_Client.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/runConfigurations/Minecraft_Server.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/uiDesigner.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
+    <list default="true" id="dff6dca4-1f24-4d22-b678-8f7ed31188b1" name="Changes" comment="26.1">
+      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/gradle.properties" beforeDir="false" afterPath="$PROJECT_DIR$/gradle.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/pw/smto/morefurnaces/DisableHelper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pw/smto/morefurnaces/DisableHelper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/pw/smto/morefurnaces/MoreFurnaces.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pw/smto/morefurnaces/MoreFurnaces.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/pw/smto/morefurnaces/api/MoreFurnacesContent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pw/smto/morefurnaces/api/MoreFurnacesContent.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/pw/smto/morefurnaces/block/CustomFurnaceBlock.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pw/smto/morefurnaces/block/CustomFurnaceBlock.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/pw/smto/morefurnaces/block/CustomFurnaceBlockEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pw/smto/morefurnaces/block/CustomFurnaceBlockEntity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/pw/smto/morefurnaces/item/FurnaceModuleItem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pw/smto/morefurnaces/item/FurnaceModuleItem.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/pw/smto/morefurnaces/item/GenericBlockItem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pw/smto/morefurnaces/item/GenericBlockItem.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/pw/smto/morefurnaces/mixin/FurnaceOutputSlotMixin.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pw/smto/morefurnaces/mixin/FurnaceOutputSlotMixin.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/pw/smto/morefurnaces/mixin/ShapelessRecipeMixin.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pw/smto/morefurnaces/mixin/ShapelessRecipeMixin.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/pw/smto/morefurnaces/module/ModifierModule.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pw/smto/morefurnaces/module/ModifierModule.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/fabric.mod.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fabric.mod.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/morefurnaces.accesswidener" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/morefurnaces.accesswidener" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -135,26 +104,26 @@
   <component name="ProjectViewState">
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Gradle.Download Sources.executor": "Run",
-    "Gradle.MoreFurnaces [build].executor": "Run",
-    "Gradle.MoreFurnaces [clean].executor": "Run",
-    "Gradle.MoreFurnaces [genSourcesWithVineflower].executor": "Run",
-    "Gradle.MoreFurnaces [jar].executor": "Run",
-    "Gradle.MoreFurnaces [runClient].executor": "Run",
-    "ModuleVcsDetector.initialDetectionPerformed": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "RunOnceActivity.typescript.service.memoryLimit.init": "true",
-    "codeWithMe.voiceChat.enabledByDefault": "false",
-    "com.codeium.enabled": "true",
-    "git-widget-placeholder": "master",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "/home/jong/Development/MinecraftModding/MoreFurnaces/src/main/resources/data/morefurnaces/recipe",
-    "settings.editor.selected.configurable": "reference.settingsdialog.project.gradle"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Gradle.Download Sources.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.MoreFurnaces [build].executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.MoreFurnaces [clean].executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.MoreFurnaces [genSourcesWithVineflower].executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.MoreFurnaces [jar].executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.MoreFurnaces [runClient].executor&quot;: &quot;Run&quot;,
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.typescript.service.memoryLimit.init&quot;: &quot;true&quot;,
+    &quot;codeWithMe.voiceChat.enabledByDefault&quot;: &quot;false&quot;,
+    &quot;com.codeium.enabled&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/home/jong/Development/MinecraftModding/MoreFurnaces/src/main/resources/data/morefurnaces/recipe&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settingsdialog.project.gradle&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/src/main/resources/data/morefurnaces/recipe" />
@@ -422,7 +391,15 @@
       <option name="project" value="LOCAL" />
       <updated>1768405115420</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="26.1">
+      <option name="closed" value="true" />
+      <created>1776082303619</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1776082303619</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -453,7 +430,8 @@
     <MESSAGE value="1.21.10, again" />
     <MESSAGE value="1.21.11" />
     <MESSAGE value="1.21.8" />
-    <option name="LAST_COMMIT_MESSAGE" value="1.21.8" />
+    <MESSAGE value="26.1" />
+    <option name="LAST_COMMIT_MESSAGE" value="26.1" />
   </component>
   <component name="github-copilot-workspace">
     <instructionFileLocations>
