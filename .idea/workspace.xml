@@ -4,8 +4,16 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="dff6dca4-1f24-4d22-b678-8f7ed31188b1" name="Changes" comment="Fix oversight causing #8 and bump version">
+    <list default="true" id="dff6dca4-1f24-4d22-b678-8f7ed31188b1" name="Changes" comment="ugh">
+      <change beforePath="$PROJECT_DIR$/.idea/modules/pw.smto.MoreFurnaces.main.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules/pw.smto.MoreFurnaces.main.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules/pw.smto.MoreFurnaces.test.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules/pw.smto.MoreFurnaces.test.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/runConfigurations/Minecraft_Server.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/runConfigurations/Minecraft_Server.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gradle.properties" beforeDir="false" afterPath="$PROJECT_DIR$/gradle.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.properties" beforeDir="false" afterPath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pw/smto/morefurnaces/block/CustomFurnaceBlockEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pw/smto/morefurnaces/block/CustomFurnaceBlockEntity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/fabric.mod.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fabric.mod.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -76,7 +84,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="1.21.8" />
+        <entry key="$PROJECT_DIR$" value="26.1" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -133,7 +141,7 @@
       <recent name="pw.smto.morefurnaces.mixin" />
     </key>
   </component>
-  <component name="RunManager" selected="Gradle.MoreFurnaces [build]">
+  <component name="RunManager" selected="Gradle.MoreFurnaces [runClient]">
     <configuration name="MoreFurnaces [build]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
@@ -261,11 +269,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Gradle.MoreFurnaces [build]" />
-        <item itemvalue="Gradle.MoreFurnaces [jar]" />
         <item itemvalue="Gradle.MoreFurnaces [runClient]" />
+        <item itemvalue="Gradle.MoreFurnaces [jar]" />
         <item itemvalue="Gradle.MoreFurnaces [genSourcesWithVineflower]" />
         <item itemvalue="Gradle.MoreFurnaces [clean]" />
+        <item itemvalue="Gradle.MoreFurnaces [build]" />
       </list>
     </recent_temporary>
   </component>
@@ -405,7 +413,15 @@
       <option name="project" value="LOCAL" />
       <updated>1777650915882</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <task id="LOCAL-00016" summary="ugh">
+      <option name="closed" value="true" />
+      <created>1781605881699</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1781605881699</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -438,7 +454,8 @@
     <MESSAGE value="1.21.8" />
     <MESSAGE value="26.1" />
     <MESSAGE value="Fix oversight causing #8 and bump version" />
-    <option name="LAST_COMMIT_MESSAGE" value="Fix oversight causing #8 and bump version" />
+    <MESSAGE value="ugh" />
+    <option name="LAST_COMMIT_MESSAGE" value="ugh" />
   </component>
   <component name="github-copilot-workspace">
     <instructionFileLocations>

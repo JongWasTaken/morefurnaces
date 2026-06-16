@@ -24,10 +24,7 @@ import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.ContainerHelper;
 import net.minecraft.world.WorldlyContainer;
-import net.minecraft.world.entity.Display;
-import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.ExperienceOrb;
+import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.player.StackedItemContents;
@@ -63,6 +60,7 @@ import pw.smto.morefurnaces.MoreFurnaces;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 public class CustomFurnaceBlockEntity extends BaseContainerBlockEntity implements WorldlyContainer, RecipeCraftingHolder, StackedContentsCompatible {
     private int speedMultiplier = 1;
@@ -207,7 +205,7 @@ public class CustomFurnaceBlockEntity extends BaseContainerBlockEntity implement
             var state = world.getBlockState(pos);
             var d = state.getValue(AbstractFurnaceBlock.FACING);
 
-            this.moduleDisplay = new Display.ItemDisplay(EntityType.ITEM_DISPLAY, world);
+            this.moduleDisplay = new Display.ItemDisplay(EntityTypes.ITEM_DISPLAY, world);
             this.moduleDisplay.setItemStack(this.installedModifierModule.getItemStack());
             this.moduleDisplay.setTransformation(new Transformation(
                     null,
@@ -224,7 +222,7 @@ public class CustomFurnaceBlockEntity extends BaseContainerBlockEntity implement
     }
 
     private Vec3 calculateModuleDisplayPosition(Direction d) {
-        return this.worldPosition.getCenter().relative(d, 0.5).add(0,0.44,0).relative(this.getLeftDirection(d), 0.44);
+        return Vec3.atCenterOf(this.worldPosition).relative(d, 0.5).add(0,0.44,0).relative(Objects.requireNonNull(this.getLeftDirection(d)), 0.44);
     }
 
     public void killItemDisplay() {
