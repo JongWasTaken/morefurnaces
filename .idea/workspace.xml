@@ -4,8 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="dff6dca4-1f24-4d22-b678-8f7ed31188b1" name="Changes" comment="Fix oversight causing #8 and bump version">
+    <list default="true" id="dff6dca4-1f24-4d22-b678-8f7ed31188b1" name="Changes" comment="Update dependencies and lock to 26.1.2">
+      <change beforePath="$PROJECT_DIR$/.idea/modules/pw.smto.MoreFurnaces.main.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules/pw.smto.MoreFurnaces.main.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules/pw.smto.MoreFurnaces.test.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules/pw.smto.MoreFurnaces.test.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/runConfigurations/Minecraft_Server.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/runConfigurations/Minecraft_Server.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gradle.properties" beforeDir="false" afterPath="$PROJECT_DIR$/gradle.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/fabric.mod.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fabric.mod.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -115,7 +120,7 @@
     "RunOnceActivity.typescript.service.memoryLimit.init": "true",
     "codeWithMe.voiceChat.enabledByDefault": "false",
     "com.codeium.enabled": "true",
-    "git-widget-placeholder": "master",
+    "git-widget-placeholder": "26.1",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "/home/jong/Development/MinecraftModding/MoreFurnaces/src/main/resources/data/morefurnaces/recipe",
     "nodejs_package_manager_path": "npm",
