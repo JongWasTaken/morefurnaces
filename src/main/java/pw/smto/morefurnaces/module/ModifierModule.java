@@ -31,11 +31,14 @@ public enum ModifierModule {
     }
 
     public int adjustFuelTime(int originalTime) {
+        if (originalTime == 0) {
+            return 0;
+        }
         return this.fuelAdjustment.apply(originalTime);
     }
 
-    public int adjustSpeedMultiplier(int originalSpeedMultiplier) {
-        return this.speedMultiplierAdjustment.apply(originalSpeedMultiplier);
+    public int adjustSpeedMultiplier(int originalSpeedMultiplier, float itemSpeedMultiplier) {
+        return this.speedMultiplierAdjustment.apply(originalSpeedMultiplier) * (int) itemSpeedMultiplier;
     }
 
     public ItemStack getItemStack() {

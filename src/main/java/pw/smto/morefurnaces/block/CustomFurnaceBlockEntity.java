@@ -10,6 +10,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.NonNullList;
 import net.minecraft.core.RegistryAccess;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.core.particles.SimpleParticleType;
 import net.minecraft.network.chat.Component;
@@ -22,6 +23,7 @@ import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.Brightness;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
+import net.minecraft.util.context.ContextKeySet;
 import net.minecraft.world.ContainerHelper;
 import net.minecraft.world.WorldlyContainer;
 import net.minecraft.world.entity.*;
@@ -36,21 +38,24 @@ import net.minecraft.world.inventory.StackedContentsCompatible;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.item.component.CookingFuel;
 import net.minecraft.world.item.crafting.AbstractCookingRecipe;
 import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.item.crafting.RecipeManager;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.item.crafting.SingleRecipeInput;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.AbstractFurnaceBlock;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.entity.BaseContainerBlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntity;
-import net.minecraft.world.level.block.entity.FuelValues;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.storage.ValueInput;
 import net.minecraft.world.level.storage.ValueOutput;
+import net.minecraft.world.level.storage.loot.LootContext;
+import net.minecraft.world.level.storage.loot.LootParams;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.Nullable;
@@ -61,8 +66,10 @@ import pw.smto.morefurnaces.MoreFurnaces;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+import java.util.Optional;
 
 public class CustomFurnaceBlockEntity extends BaseContainerBlockEntity implements WorldlyContainer, RecipeCraftingHolder, StackedContentsCompatible {
+
     private int speedMultiplier = 1;
     private ModifierModule installedModifierModule = ModifierModule.NO_MODULE;
     private String titleTranslationKey = "";
@@ -245,7 +252,15 @@ public class CustomFurnaceBlockEntity extends BaseContainerBlockEntity implement
     public static void tick(ServerLevel world, BlockPos pos, BlockState state, CustomFurnaceBlockEntity t) {
         t.ensureItemDisplayExistence(world, pos);
         if (t.powered) return;
-        for (int i = 0; i < t.installedModifierModule.adjustSpeedMultiplier(t.speedMultiplier); i++) {
+        float itemSpeedMultiplier = 1.0f;
+        ItemStack fuelStack = t.inventory.get(1);
+        if (!fuelStack.isEmpty()) {
+            var fuel = fuelStack.get(DataComponents.COOKING_FUEL);
+            if (fuel != null) {
+                itemSpeedMultiplier = fuel.speedMultiplier().get(t.getLootContext(world), 1);
+            }
+        }
+        for (int i = 0; i < t.installedModifierModule.adjustSpeedMultiplier(t.speedMultiplier, itemSpeedMultiplier); i++) {
             CustomFurnaceBlockEntity.smeltTick(world, pos, state, t);
         }
         if (t.random.nextInt(20) >= 18) {
@@ -317,7 +332,7 @@ public class CustomFurnaceBlockEntity extends BaseContainerBlockEntity implement
         boolean bl3 = !itemStack2.isEmpty();
         boolean bl4 = !itemStack.isEmpty();
         if (blockEntity.fuelTime == 0) {
-            blockEntity.fuelTime = blockEntity.getFuelTime(world.fuelValues(), itemStack);
+            blockEntity.fuelTime = blockEntity.getFuelTime(itemStack);
         }
 
         if (blockEntity.isBurning() || bl4 && bl3) {
@@ -331,7 +346,7 @@ public class CustomFurnaceBlockEntity extends BaseContainerBlockEntity implement
 
             int i = blockEntity.getMaxStackSize();
             if (!blockEntity.isBurning() && CustomFurnaceBlockEntity.canAcceptRecipeOutput(world.registryAccess(), recipeEntry, singleStackRecipeInput, blockEntity.inventory, i)) {
-                blockEntity.burnTime = blockEntity.getFuelTime(world.fuelValues(), itemStack);
+                blockEntity.burnTime = blockEntity.getFuelTime(itemStack);
                 blockEntity.fuelTime = blockEntity.burnTime;
                 if (blockEntity.isBurning()) {
                     bl2 = true;
@@ -429,8 +444,12 @@ public class CustomFurnaceBlockEntity extends BaseContainerBlockEntity implement
         }
     }
 
-    protected int getFuelTime(FuelValues fuelRegistry, ItemStack stack) {
-        return this.installedModifierModule.adjustFuelTime(fuelRegistry.burnDuration(stack));
+    protected int getFuelTime(ItemStack stack) {
+        CookingFuel fuelComponent = stack.get(DataComponents.COOKING_FUEL);
+        if (fuelComponent != null && this.level != null && !this.level.isClientSide()) {
+            return this.installedModifierModule.adjustFuelTime(fuelComponent.burnTime().get(this.getLootContext((ServerLevel) this.level), 0));
+        }
+        return 0;
     }
 
     private static int getCookTime(ServerLevel world, CustomFurnaceBlockEntity furnace) {
@@ -497,7 +516,7 @@ public class CustomFurnaceBlockEntity extends BaseContainerBlockEntity implement
         } else {
             ItemStack itemStack = this.inventory.get(1);
             assert this.level != null;
-            return this.level.fuelValues().isFuel(stack) || stack.is(Items.BUCKET) && !itemStack.is(Items.BUCKET);
+            return stack.has(DataComponents.COOKING_FUEL) || stack.is(Items.BUCKET) && !itemStack.is(Items.BUCKET);
         }
     }
 
